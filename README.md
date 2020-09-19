@@ -1,1 +1,1 @@
-# nextjs
+Private Learning Shop Project
