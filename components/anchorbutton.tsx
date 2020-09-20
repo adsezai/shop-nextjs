@@ -4,12 +4,16 @@ import s from './anchorbutton.module.css'
 interface Props {
   link: string
   children: string
+  only?: string | Array<string>
 }
 
-export default function Anchorbutton({ link, children }: Props) {
+export default function Anchorbutton({ link, children, only }: Props) {
+  const showOn = only && Array.isArray(only) ? only.join(' ') : [only].join(' ')
   return (
-    <Link href={link}>
-      <a className={s.anchorbutton}>{children}</a>
-    </Link>
+    <div className={showOn}>
+      <Link href={link}>
+        <a className={[s.anchorbutton].join(' ')}>{children}</a>
+      </Link>
+    </div>
   )
 }

@@ -7,14 +7,18 @@ export default function Navbar() {
     <div className={s.navbar}>
       <div className={s.container}>
         <div className={s.navbarPrimary}>
-          <Link href={'/'}>SHOPP</Link>
+          <Link href={'/'}>SHOP</Link>
           <div>
             <input></input>
           </div>
         </div>
         <div className={s.navbarSecondary}>
-          <Anchorbutton link='/'>Sell</Anchorbutton>
-          <Anchorbutton link='/'>Login</Anchorbutton>
+          <Anchorbutton only='lg' link='/'>
+            Sell
+          </Anchorbutton>
+          <Anchorbutton only={['lg']} link='/'>
+            Login
+          </Anchorbutton>
           <Anchorbutton link='/'>User</Anchorbutton>
         </div>
       </div>

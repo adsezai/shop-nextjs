@@ -16,3 +16,21 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.sm,
+.md,
+.lg {
+  display: block !important;
+}
+
+@media (min-width: 960px) {
+  .sm {
+    display: none !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .lg {
+    display: none !important;
+  }
+}
