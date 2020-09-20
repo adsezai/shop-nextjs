@@ -41,9 +41,6 @@ export default function Home({ itemProps }: Props) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>Home</p>
-      </section>
       <div style={{ maxWidth: '900px' }}>
         <Cardgrid>
           {items.map(item => (

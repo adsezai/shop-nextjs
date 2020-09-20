@@ -6,6 +6,11 @@
   align-items: center;
   padding: 0 10px;
 }
+.title {
+  font-weight: 600;
+  font-size: 24px;
+}
+
 .container {
   max-width: 1300px;
   margin: 0 auto;
@@ -30,5 +35,5 @@
 }
 
 .navbarSecondary > * {
-  margin: 0 2px;
+  margin: 0 5px;
 }
