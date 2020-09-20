@@ -3,6 +3,7 @@ import Layout from '../../components/layout'
 import { getItem } from '../../lib/api/items'
 import { Item } from '../../lib/common/item.interface'
 import Date from '../../components/date'
+
 import styles from './id.module.css'
 
 interface Props {
@@ -18,7 +19,7 @@ export default function ItemPage({ item }: Props) {
         </div>
         <div>Title: {item.title}</div>
         <div>Price: {item.price} €</div>
-        <Date dateString={item.createDate}></Date>
+        {/*  <Date dateString={item.createDate}></Date> */}
       </Layout>
     </>
   )
