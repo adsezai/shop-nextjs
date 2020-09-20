@@ -44,11 +44,13 @@ export default function Home({ itemProps }: Props) {
       <section className={utilStyles.headingMd}>
         <p>Home</p>
       </section>
-      <Cardgrid>
-        {items.map(item => (
-          <Itemcard item={item}></Itemcard>
-        ))}
-      </Cardgrid>
+      <div style={{ maxWidth: '900px' }}>
+        <Cardgrid>
+          {items.map(item => (
+            <Itemcard item={item}></Itemcard>
+          ))}
+        </Cardgrid>
+      </div>
       <button onClick={handleLoadMore}>Load More</button>
     </Layout>
   )

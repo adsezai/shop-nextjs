@@ -1,7 +1,34 @@
 .navbar {
   height: 50px;
   background-color: #7befb2;
-
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
+}
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbarPrimary {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.navbarPrimary > * {
+  margin: 0 5px;
+}
+
+.navbarSecondary {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.navbarSecondary > * {
+  margin: 0 2px;
 }
