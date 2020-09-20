@@ -7,7 +7,7 @@ export default function Navbar() {
     <div className={s.navbar}>
       <div className={s.container}>
         <div className={s.navbarPrimary}>
-          <Link href={'/'}>SHOP</Link>
+          <Link href={'/'}>SHOPP</Link>
           <div>
             <input></input>
           </div>
