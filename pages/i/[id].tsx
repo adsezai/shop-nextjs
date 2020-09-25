@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Layout from '../../components/layout'
-import { getItem } from '../../lib/api/items'
+import { getItem } from '../../lib/api/server/items'
 import { Item } from '../../lib/common/item.interface'
 import Date from '../../components/date'
 
