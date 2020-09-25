@@ -56,9 +56,9 @@ export default function Home({ itemProps }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   let items: null | Array<Item> = null
-  const cookies = cookie.parse(req.headers.cookie)
+  //const cookies = cookie.parse(req.headers.cookie)
   // TODO check if jwt token should be in http cookie or header or only refresh token should be in httpcookie
-  const jwt = cookies['ACCESS_TOKEN']
+  //const jwt = cookies['ACCESS_TOKEN']
   // make request with access token
   // if fails
   //    if no refresh token => send 401
