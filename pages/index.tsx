@@ -1,20 +1,23 @@
 import { useState } from 'react'
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
 import * as cookie from 'cookie'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import Itemcard from '../components/itemcard'
 import Cardgrid from '../components/cardgrid'
-import utilStyles from '../styles/utils.module.css'
+
 import { getItemList } from '../lib/api/server/items'
 import { Item } from '../lib/common/item.interface'
+import { User } from '../lib/common/user.interface'
+import { tokenNames as n } from '../lib/global/const'
 import axios from 'axios'
+import { getUserDetails } from '../lib/api/server/login'
 
 interface Props {
   itemProps: Array<Item>
+  user: User
 }
-export default function Home({ itemProps }: Props) {
+export default function Home({ itemProps, user }: Props) {
   const [items, setItems] = useState(itemProps)
   let [pageNumber, setPageNumber] = useState(1)
 
@@ -38,7 +41,7 @@ export default function Home({ itemProps }: Props) {
   }
 
   return (
-    <Layout>
+    <Layout user={user}>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -56,26 +59,25 @@ export default function Home({ itemProps }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   let items: null | Array<Item> = null
-  //const cookies = cookie.parse(req.headers.cookie)
-  // TODO check if jwt token should be in http cookie or header or only refresh token should be in httpcookie
-  //const jwt = cookies['ACCESS_TOKEN']
-  // make request with access token
-  // if fails
-  //    if no refresh token => send 401
-  //    if refreshtoken is provided => generate new tokens and do request again and send new tokens to client
+  const cookies = cookie.parse(req.headers.cookie)
+  const accessToken = cookies[n.ACCESS_TOKEN]
 
-  /* const cookieSerialized = cookie.serialize('REFRESH_JWT', 'HalloRefreshJwt', {
-    httpOnly: true,
-    path: '/'
-  })
-  res.setHeader('Set-Cookie', cookieSerialized) */
+  let user = null
+  try {
+    user = await getUserDetails(accessToken)
+    console.log('user', user)
+  } catch (error) {
+    // TODO got error 403 forbidden, change to 401 and check for other errors as well
+    console.log('Error get user details: ', error)
+  }
 
   try {
     items = await getItemList(0, 5, null, null, null)
   } catch (error) {}
   return {
     props: {
-      itemProps: items
+      itemProps: items,
+      user: user
     }
   }
 }

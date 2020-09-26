@@ -1,8 +1,9 @@
 import s from './navbar.module.css'
 import Link from 'next/link'
 import Anchorbutton from './anchorbutton'
+import { User } from '../lib/common/user.interface'
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: User }) {
   return (
     <div className={s.navbar}>
       <div className={s.container}>
@@ -19,10 +20,12 @@ export default function Navbar() {
             Search
           </Anchorbutton> */}
           <Anchorbutton link='/sell'>Sell</Anchorbutton>
-          <Anchorbutton only={['lg']} link='/login'>
-            Login
-          </Anchorbutton>
-          <Anchorbutton link='/'>User</Anchorbutton>
+          {!user && (
+            <Anchorbutton only={['lg']} link='/login'>
+              Login
+            </Anchorbutton>
+          )}
+          {user && <Anchorbutton link='/'>{user.firstname}</Anchorbutton>}
         </div>
       </div>
     </div>

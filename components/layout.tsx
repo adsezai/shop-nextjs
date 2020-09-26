@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
+import { User } from '../lib/common/user.interface'
 import Link from 'next/link'
 import Navbar from './navbar'
 
 const name = '[Your Name]'
 export const siteTitle = 'Shop'
 
-export default function Layout({ children }: { children: React.ReactNode; home?: boolean }) {
+export default function Layout({ children, user }: { children: React.ReactNode; home?: boolean; user: User }) {
   return (
     <div>
       <Head>
@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode; home?:
         />
         <meta name='og:title' content={siteTitle} />
       </Head>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <main className={styles.container}>{children}</main>
       <footer></footer>
     </div>

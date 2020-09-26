@@ -13,3 +13,13 @@ export async function login(credentials: { email: string; password: string }) {
   )
   return res.data
 }
+
+export async function getUserDetails(accessToken: string) {
+  const res = await axios.get('/auth/user', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+  return res.data
+}
