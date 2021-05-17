@@ -7,7 +7,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { pageNumber, limit, filter, coordinates, radius } = req.body
     try {
       const response = await getItemList(pageNumber, limit, filter, coordinates, radius)
-      console.log('res', response)
       res.status(200).json(response)
     } catch (error) {
       res.status(500).json({ error: 'e' })

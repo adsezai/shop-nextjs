@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { login } from '../lib/api/client/clientRequests'
+import Layout from '../components/Layout'
 
 export default function Login() {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const router = useRouter()
 
   const handleLogin = async () => {
@@ -17,12 +18,14 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <div>Email</div>
-      <input type='text' value={email} onChange={e => setEmail(e.target.value)}></input>
-      <div>password</div>
-      <input type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
-      <button onClick={handleLogin}>Anmelden</button>
-    </div>
+    <Layout title='Shop | Login'>
+      <div>
+        <div>Email</div>
+        <input type='text' value={email} onChange={e => setEmail(e.target.value)}></input>
+        <div>password</div>
+        <input type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
+        <button onClick={handleLogin}>Anmelden</button>
+      </div>
+    </Layout>
   )
 }

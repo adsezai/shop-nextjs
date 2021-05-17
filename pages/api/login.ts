@@ -24,13 +24,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const tokens: Tokens = await login({ email, password })
 
       const accessCookie = createCookie(n.ACCESS_TOKEN, tokens.accessToken)
-      const refreshCookie = createCookie(n.REFRESH_TOKEN, tokens.refreshToken, '/refresh') // TODO Refresh token not send back to path /refresh
+      //const refreshCookie = createCookie(n.REFRESH_TOKEN, tokens.refreshToken) // TODO Refresh token not send back to path /refresh
 
-      res.setHeader('Set-Cookie', [accessCookie, refreshCookie])
+      res.setHeader('Set-Cookie', [accessCookie /* refreshCookie*/])
       res.status(200).json({ message: 'ok' })
+      res.end()
     } catch (error) {
       // TODO get axios error and return correct code, message
       res.status(500).json({ error: error.message })
+      res.end()
     }
   }
 }
