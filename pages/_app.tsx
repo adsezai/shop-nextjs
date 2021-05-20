@@ -5,6 +5,10 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { darkTheme, theme } from '../styles/theme'
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../mocks/index')
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

@@ -1,4 +1,3 @@
-import styles from './imagebox.module.css'
 import { Item } from '../lib/common/item.interface'
 import styled from 'styled-components'
 
