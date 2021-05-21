@@ -8,11 +8,11 @@ Add a `.env.local` file to the project root.
 
 ```bash
 NEXT_PUBLIC_API_MOCKING=enabled
-NEXT_PUBLIC_BACKEND_URL=http://localhost:7070
+BACKEND_URL=http://localhost:7070
 ```
 
 `NEXT_PUBLIC_API_MOCKING` enables the API Mocking.\
-Backend Request will be send to `NEXT_PUBLIC_BACKEND_URL` but they will be intercepted by the msw service worker in the browser.\
+Backend Request will be send to `BACKEND_URL` but they will be intercepted by the msw service worker in the browser.\
 To disable the mocked data set `NEXT_PUBLIC_API_MOCKING` to `disabled`.
 
 Run `npm run dev` to start the app.
