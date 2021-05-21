@@ -1,17 +1,10 @@
 import Link from 'next/link'
-import { fetchUser } from '../lib/api/client/clientRequests'
-import { useState, useEffect } from 'react'
+import { useUser } from '../lib/api/client/clientRequests'
 import Button, { ButtonSize } from './Button'
 import styled from 'styled-components'
 
 export default function Navbar() {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    fetchUser()
-      .then(res => setUser(res))
-      .catch(error => console.error(error))
-  }, [])
+  const { user, isLoading, isError, mutate } = useUser()
 
   return (
     <StyledNav>
@@ -23,7 +16,7 @@ export default function Navbar() {
         </LeftNav>
         <RightNav>
           <Button size={ButtonSize.Auto} href='/sell' text='Sell'></Button>
-          {!user && <Button size={ButtonSize.Auto} href='/login' text='Login'></Button>}
+          {isError && <Button size={ButtonSize.Auto} href='/login' text='Login'></Button>}
           {user && <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>}
         </RightNav>
       </StyledContainer>

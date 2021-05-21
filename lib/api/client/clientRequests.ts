@@ -1,3 +1,5 @@
+import useSWR from 'swr'
+
 import { User } from '../../common/user.interface'
 import { Item } from '../../common/item.interface'
 
@@ -20,17 +22,6 @@ export async function login(email: string, password: string) {
   }).then(handleFetchErrors)
 }
 
-export async function fetchUser(): Promise<User | null> {
-  return fetch(createURL('/api/user'), {
-    method: 'GET',
-    credentials: 'include',
-    redirect: 'follow',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(handleFetchErrors)
-}
-
 export async function fetchItems(pageNumber: number, limit: number): Promise<Array<Item> | null> {
   return fetch(createURL('/api/items'), {
     method: 'POST',
@@ -41,4 +32,25 @@ export async function fetchItems(pageNumber: number, limit: number): Promise<Arr
     },
     body: JSON.stringify({ pageNumber, limit })
   }).then(handleFetchErrors)
+}
+
+const fetcher = (url: string) =>
+  fetch(url, {
+    method: 'GET',
+    credentials: 'include',
+    redirect: 'follow',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(handleFetchErrors)
+
+export function useUser() {
+  const { data, error, mutate } = useSWR(createURL('/api/user'), fetcher)
+
+  return {
+    user: data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate
+  }
 }
