@@ -1,10 +1,8 @@
-// test-utils.js
 import { render } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { theme as themeObj } from '../styles/theme'
 
-// Add in any providers here if necessary:
-// (ReduxProvider, ThemeProvider, etc)
+// Wrap Components in Providers here (ReduxProvider, ThemeProvider, etc)
 const Providers = ({ children }) => {
   return <ThemeProvider theme={themeObj}>{children}</ThemeProvider>
 }

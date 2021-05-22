@@ -6,7 +6,9 @@ import { Item } from '../../common/item.interface'
 import { createURL } from '../utils'
 
 export function handleFetchErrors(response) {
-  if (!response.ok) throw Error(response.statusText)
+  if (!response.ok) {
+    throw Error(response.statusText)
+  }
   return response.json()
 }
 

@@ -16,8 +16,8 @@ export default function Navbar() {
         </LeftNav>
         <RightNav>
           <Button size={ButtonSize.Auto} href='/sell' text='Sell'></Button>
-          {isError && <Button size={ButtonSize.Auto} href='/login' text='Login'></Button>}
-          {user && <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>}
+          {isError && !isLoading && <Button size={ButtonSize.Auto} href='/login' text='Login'></Button>}
+          {user && !isLoading && <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>}
         </RightNav>
       </StyledContainer>
     </StyledNav>
