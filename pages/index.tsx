@@ -14,7 +14,7 @@ import { fetcher } from '../lib/api/client/clientRequests'
 import { Item } from '../lib/common/item.interface'
 import { User } from '../lib/common/user.interface'
 
-const PAGE_LIMIT = 5
+const PAGE_LIMIT = 2
 
 const getKey = (pageIndex, previousePageData) => {
   if (previousePageData && !previousePageData.length) return null
@@ -27,10 +27,12 @@ interface Props {
 }
 
 export default function Home({ itemProps }: Props) {
-  const { data, size, setSize } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
+  const { data, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
 
   const noData = data?.[0]?.length === 0
   const reachedEnd = noData || (data && data[data.length - 1]?.length < PAGE_LIMIT)
+  const isRefreshing = isValidating && data && data.length === size
+  const isLoadingMore = size > 0 && data && typeof data[size - 1] === 'undefined'
 
   if (!data) return 'loading'
 
@@ -44,8 +46,8 @@ export default function Home({ itemProps }: Props) {
         </Cardgrid>
         <StyledContainer>
           <Button
-            disabled={reachedEnd}
-            text='Load more'
+            disabled={reachedEnd || isRefreshing || isLoadingMore}
+            text={reachedEnd ? 'No more Data' : 'Load more'}
             size={ButtonSize.Auto}
             onClick={() => setSize(size + 1)}
           ></Button>
