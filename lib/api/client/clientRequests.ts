@@ -24,6 +24,9 @@ export async function login(email: string, password: string) {
   }).then(handleFetchErrors)
 }
 
+/**
+ * @deprecated Use useSWRInfinite Hook for Page access for items.
+ */
 export async function fetchItems(pageNumber: number, limit: number): Promise<Array<Item> | null> {
   return fetch(createURL('/api/items'), {
     method: 'POST',
@@ -36,7 +39,7 @@ export async function fetchItems(pageNumber: number, limit: number): Promise<Arr
   }).then(handleFetchErrors)
 }
 
-const fetcher = (url: string) =>
+export const fetcher = (url: string) =>
   fetch(url, {
     method: 'GET',
     credentials: 'include',
@@ -47,7 +50,12 @@ const fetcher = (url: string) =>
   }).then(handleFetchErrors)
 
 export function useUser() {
-  const { data, error, mutate } = useSWR(createURL('/api/user'), fetcher)
+  const { data, error, mutate } = useSWR(createURL('/api/user'), fetcher, {
+    onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+      // TODO change this to 401 so it does not retry when unautorized
+      if (error.status === 500) return
+    }
+  })
 
   return {
     user: data,

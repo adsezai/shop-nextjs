@@ -1,8 +1,14 @@
 import axios from './axios'
 
-export async function getItemList(page: number, limit: number, filter: string, coordinates: any, radius: any) {
+export async function getItemList(
+  page: number | string | string[],
+  limit: number | string | string[],
+  filter: string | string[],
+  coordinates: any,
+  radius: any
+) {
   const res = await axios.post(
-    'items/paginated',
+    'items/page',
     {
       searchOptions: {
         page,

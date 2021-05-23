@@ -1,17 +1,25 @@
-import { useState } from 'react'
 import { GetServerSideProps } from 'next'
+import styled from 'styled-components'
+import { useSWRInfinite } from 'swr'
 
 import Layout from '../components/Layout'
 import Itemcard from '../components/Itemcard'
 import Cardgrid from '../components/Cardgrid'
 import Button, { ButtonSize } from '../components/Button'
 
+import { createURL } from '../lib/api/utils'
 import { getItemList } from '../lib/api/server/items'
-import { fetchItems } from '../lib/api/client/clientRequests'
+import { fetcher } from '../lib/api/client/clientRequests'
+
 import { Item } from '../lib/common/item.interface'
 import { User } from '../lib/common/user.interface'
 
-import styled from 'styled-components'
+const PAGE_LIMIT = 5
+
+const getKey = (pageIndex, previousePageData) => {
+  if (previousePageData && !previousePageData.length) return null
+  return createURL(`/api/items?page=${pageIndex + 1}&limit=${PAGE_LIMIT}`)
+}
 
 interface Props {
   itemProps: Array<Item>
@@ -19,23 +27,28 @@ interface Props {
 }
 
 export default function Home({ itemProps }: Props) {
-  const [items, setItems] = useState(itemProps)
-  const [pageNumber, setPageNumber] = useState(1)
+  const { data, size, setSize } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
 
-  const handleLoadMore = async () => {
-    const newItems = await fetchItems(pageNumber, 5)
-    // TODO handle last page
-    setPageNumber(p => ++p)
+  const noData = data?.[0]?.length === 0
+  const reachedEnd = noData || (data && data[data.length - 1]?.length < PAGE_LIMIT)
 
-    setItems([...items, ...newItems])
-  }
+  if (!data) return 'loading'
 
   return (
     <>
       <Layout title='Shop'>
-        <Cardgrid>{items && items.map(item => <Itemcard item={item}></Itemcard>)}</Cardgrid>
+        <Cardgrid>
+          {data.map((items, index) => {
+            return items.map(i => <Itemcard key={i.id} item={i}></Itemcard>)
+          })}
+        </Cardgrid>
         <StyledContainer>
-          <Button text='Load more' size={ButtonSize.Auto} onClick={handleLoadMore}></Button>
+          <Button
+            disabled={reachedEnd}
+            text='Load more'
+            size={ButtonSize.Auto}
+            onClick={() => setSize(size + 1)}
+          ></Button>
         </StyledContainer>
       </Layout>
     </>
@@ -45,7 +58,7 @@ export default function Home({ itemProps }: Props) {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   let items: null | Array<Item> = null
   try {
-    items = await getItemList(0, 5, null, null, null)
+    items = await getItemList(0, PAGE_LIMIT, null, null, null)
   } catch (error) {}
   return {
     props: {
