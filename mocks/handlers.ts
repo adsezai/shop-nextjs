@@ -8,10 +8,14 @@ export const handlers = [
     return res(ctx.json(login.sucess))
   }),
   /* mock Items for frontend and backend */
+
   rest.get(createURL('/api/items'), (req, res, ctx) => {
-    return res(ctx.json(times(random(1, 10), item)))
+    const limit = parseInt(req.url.searchParams.get('limit'))
+    return res(ctx.json(times(limit || random(1, 10), item)))
   }),
   rest.post(process.env.BACKEND_URL + '/items/page', (req, res, ctx) => {
-    return res(ctx.json(times(random(1, 10), item)))
+    const limit = req.body['searchOptions']['limit']
+    console.log('Limit in post ', limit)
+    return res(ctx.json(times(limit || random(1, 10), item)))
   })
 ]
