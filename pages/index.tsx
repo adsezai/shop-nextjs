@@ -27,7 +27,7 @@ interface Props {
 }
 
 export default function Home({ itemProps }: Props) {
-  const { data, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
+  const { data, size, error, setSize, isValidating } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
 
   const noData = data?.[0]?.length === 0
   const reachedEnd = noData || (data && data[data.length - 1]?.length < PAGE_LIMIT)
@@ -59,12 +59,19 @@ export default function Home({ itemProps }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   let items: null | Array<Item> = null
+  let error = null
   try {
     items = await getItemList(0, PAGE_LIMIT, null, null, null)
-  } catch (error) {}
+  } catch (err) {
+    error = {
+      statusCode: err.code,
+      message: err.message
+    }
+  }
   return {
     props: {
-      itemProps: items
+      itemProps: items,
+      error: error
     }
   }
 }

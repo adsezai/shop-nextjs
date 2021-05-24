@@ -1,6 +1,7 @@
 import '../styles/global.css'
 
 import { AppProps } from 'next/app'
+import Error from 'next/error'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { darkTheme, theme } from '../styles/theme'
@@ -10,6 +11,10 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+  // TODO handle error in component?
+  if (pageProps.error) {
+    return <Error statusCode={pageProps.error.statusCode} title={pageProps.error.message} />
+  }
   return (
     <>
       <Head>
