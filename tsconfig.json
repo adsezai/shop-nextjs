@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "test/jest-setup.js" 
+    "test/jest-setup.js" ,
+    ".svg"
   ],
   "exclude": [
     "node_modules"
