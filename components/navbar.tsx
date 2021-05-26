@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import styled from 'styled-components'
+import useTranslation from 'next-translate/useTranslation'
+
 import { useUser } from '../lib/api/client/clientRequests'
 import Button, { ButtonSize } from './Button'
-import styled from 'styled-components'
 
 export default function Navbar() {
+  const { t } = useTranslation('common')
   const { user, isLoading, isError, mutate } = useUser()
 
   return (
@@ -15,8 +18,8 @@ export default function Navbar() {
           </Link>
         </LeftNav>
         <RightNav>
-          <Button size={ButtonSize.Auto} href='/sell' text='Sell'></Button>
-          {isError && !isLoading && <Button size={ButtonSize.Auto} href='/login' text='Login'></Button>}
+          <Button size={ButtonSize.Auto} href='/sell' text={t('sell')}></Button>
+          {isError && !isLoading && <Button size={ButtonSize.Auto} href='/login' text={t('login')}></Button>}
           {user && !isLoading && <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>}
         </RightNav>
       </StyledContainer>

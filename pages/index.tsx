@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import styled from 'styled-components'
 import { useSWRInfinite } from 'swr'
+import useTranslation from 'next-translate/useTranslation'
 
 import Layout from '../components/Layout'
 import Itemcard from '../components/Itemcard'
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export default function Home({ itemProps }: Props) {
+  const { t } = useTranslation('home')
   const { data, size, error, setSize, isValidating } = useSWRInfinite(getKey, fetcher, { initialData: [itemProps] })
 
   const noData = data?.[0]?.length === 0
@@ -47,7 +49,7 @@ export default function Home({ itemProps }: Props) {
         <StyledContainer>
           <Button
             disabled={reachedEnd || isRefreshing || isLoadingMore}
-            text={reachedEnd ? 'No more Data' : 'Load more'}
+            text={reachedEnd ? t('noMoreData') : t('loadMore')}
             size={ButtonSize.Auto}
             onClick={() => setSize(size + 1)}
           ></Button>

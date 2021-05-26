@@ -6,19 +6,20 @@ import FacebookIcon from '../public/icons/facebook.svg'
 
 type AuthButtonProps = {
   href: string
+  value: string
 }
 
-export const AuthButton = ({ href }: AuthButtonProps) => {
+export const AuthButton = ({ href, value }: AuthButtonProps) => {
   return (
     <Link href={href}>
       <StyledAnchor>
-        <StyledAuthButton>Anmelden</StyledAuthButton>
+        <StyledAuthButton>{value}</StyledAuthButton>
       </StyledAnchor>
     </Link>
   )
 }
 
-export const GoogleAuthButton = ({ href }: AuthButtonProps) => {
+export const GoogleAuthButton = ({ href, value }: AuthButtonProps) => {
   return (
     <Link href={href}>
       <StyledAnchor>
@@ -27,14 +28,14 @@ export const GoogleAuthButton = ({ href }: AuthButtonProps) => {
             <GoogleIcon />
           </StyledIcon>
           <Space x={SpaceSize.xxs} />
-          Weiter mit Google
+          {value}
         </StyledGoogleAuthButton>
       </StyledAnchor>
     </Link>
   )
 }
 
-export const FacebookAuthButton = ({ href }: AuthButtonProps) => {
+export const FacebookAuthButton = ({ href, value }: AuthButtonProps) => {
   return (
     <Link href={href}>
       <StyledAnchor>
@@ -43,7 +44,7 @@ export const FacebookAuthButton = ({ href }: AuthButtonProps) => {
             <FacebookIcon />
           </StyledIcon>
           <Space x={SpaceSize.xxs} />
-          Weiter mit Facebook
+          {value}
         </StyledFacebookAuthButton>
       </StyledAnchor>
     </Link>
