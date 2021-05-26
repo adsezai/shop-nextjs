@@ -47,7 +47,7 @@ export const Box = styled.div<{ width?: string; direction?: string; wrap?: boole
   display: flex;
   flex-direction: ${props => props.direction || 'row'};
   flex-wrap: ${props => (props.wrap ? 'wrap' : 'nowrap')};
-  width: ${props => props.width};
+  width: 100%;
 `
 
 const CenterHorizontallyVertically = ({ children }) => {

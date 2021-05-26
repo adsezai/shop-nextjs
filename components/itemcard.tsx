@@ -10,7 +10,7 @@ export default function Itemcard({ item }: { item: Item }) {
         <StyledCard>
           <StyledContent>
             <StyledImagecontent>
-              <StyledImage src='https://picsum.photos/237/237' alt='img'></StyledImage>
+              <StyledImage src='https://via.placeholder.com/150' alt='img'></StyledImage>
             </StyledImagecontent>
             <StyledItemcontent>
               <StyledText>{item.title}</StyledText>

@@ -38,7 +38,8 @@ export const theme: Theme = {
       nav: '#7befb2'
     },
     borders: {
-      hairline: 'rgb(235, 238, 240)'
+      hairline: 'rgb(235, 238, 240)',
+      lightgray: '#CBD5E0'
     }
   },
 
@@ -55,7 +56,7 @@ export const theme: Theme = {
 
   fontSizes: {
     small: '0.6rem',
-    normal: '0.7rem',
+    normal: '0.75rem',
     large: '0.8rem',
     xlarge: '1rem',
     jumbo: '1.2rem'

@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
+
 import { login } from '../lib/api/client/clientRequests'
 import Layout from '../components/Layout'
+import Input from '../components/Input'
+import { FacebookAuthButton, GoogleAuthButton, AuthButton } from '../components/AuthButton'
+import { Space, SpaceSize, Box } from '../styles/utils'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -10,7 +15,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await login(email, password)
+      await login(email, password)
       router.push('/')
     } catch (error) {
       console.log('Could not login user', error)
@@ -19,13 +24,77 @@ export default function Login() {
 
   return (
     <Layout title='Shop | Login'>
-      <div>
-        <div>Email</div>
-        <input type='text' value={email} onChange={e => setEmail(e.target.value)}></input>
-        <div>password</div>
-        <input type='password' value={password} onChange={e => setPassword(e.target.value)}></input>
-        <button onClick={handleLogin}>Anmelden</button>
-      </div>
+      <Body>
+        Login
+        <StyledWrapper>
+          <LoginContainer>
+            <ResponsiveBox width='47%' direction='column'>
+              <Input
+                type='text'
+                placeholder='Email'
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setEmail(e.target.value)}
+              ></Input>
+              <Space y={SpaceSize.small}></Space>
+              <Input
+                type='password'
+                placeholder='Passwort'
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setPassword(e.target.value)}
+              ></Input>
+              <Space y={SpaceSize.small}></Space>
+              <AuthButton href=''></AuthButton>
+            </ResponsiveBox>
+            <ResponsiveBox width='6%'></ResponsiveBox>
+            <ResponsiveBox width='47%'>
+              <StyledSocialSignin>
+                <GoogleAuthButton href=''></GoogleAuthButton>
+                <Space y={SpaceSize.xs}></Space>
+                <FacebookAuthButton href=''></FacebookAuthButton>
+              </StyledSocialSignin>
+            </ResponsiveBox>
+          </LoginContainer>
+        </StyledWrapper>
+      </Body>
     </Layout>
   )
 }
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 715px;
+  margin: 0 auto;
+  padding: 16px;
+`
+
+const StyledWrapper = styled.div`
+  margin-top: 15px;
+  display: flex;
+  width: 100%;
+`
+
+const ResponsiveBox = styled(Box)`
+  margin: 10px 0;
+  @media screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: ${props => props.width};
+  }
+`
+
+const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  flex-grow: 1;
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    flex-direction: row;
+  }
+`
+
+const StyledSocialSignin = styled.div`
+  dispay: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`

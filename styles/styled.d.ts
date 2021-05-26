@@ -30,6 +30,7 @@ type ColorBackground = {
 
 type ColorBorders = {
   hairline: string
+  lightgray: string
 }
 type Colors = {
   primary: ColorBase
