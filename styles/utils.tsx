@@ -41,11 +41,12 @@ export const SpaceSize = {
   mega: 'mega'
 }
 
-export const Box = styled.div<{ width?: string; direction?: string; wrap?: boolean }>`
+export const Box = styled.div<{ width?: string; direction?: string; justify?: string; wrap?: boolean }>`
   box-sizing: border-box;
 
   display: flex;
   flex-direction: ${props => props.direction || 'row'};
+  justify-content: ${props => props.justify || 'flex-start'};
   flex-wrap: ${props => (props.wrap ? 'wrap' : 'nowrap')};
   width: 100%;
 `

@@ -5,17 +5,18 @@ import GoogleIcon from '../public/icons/google.svg'
 import FacebookIcon from '../public/icons/facebook.svg'
 
 type AuthButtonProps = {
-  href: string
+  href?: string
   value: string
+  disabled?: boolean
 }
 
-export const AuthButton = ({ href, value }: AuthButtonProps) => {
+export const AuthButton = ({ value, disabled }: AuthButtonProps) => {
   return (
-    <Link href={href}>
-      <StyledAnchor>
-        <StyledAuthButton>{value}</StyledAuthButton>
-      </StyledAnchor>
-    </Link>
+    <StyledAnchor>
+      <StyledAuthButton disabled={disabled} type='submit'>
+        {value}
+      </StyledAuthButton>
+    </StyledAnchor>
   )
 }
 
@@ -73,7 +74,7 @@ const StyledAnchor = styled.a`
   text-decoration: none;
 `
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.button`
   display:flex;
   justify-content: center;
   align-items: center;
@@ -97,6 +98,8 @@ const StyledContainer = styled.div`
   
   border-image: initial;
   font-family: inherit;
+
+  
   `
 
 const StyledAuthButton = styled(StyledContainer)`
@@ -105,6 +108,11 @@ const StyledAuthButton = styled(StyledContainer)`
   font-size: ${props => props.theme.fontSizes.normal};
   font-weight: ${props => props.theme.fontWeights.bold};
   color: white;
+  line-height: 20px;
+
+  :disabled {
+    background: none #6a7d72;
+  }
 `
 
 const StyledGoogleAuthButton = styled(StyledContainer)`

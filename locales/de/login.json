@@ -1,7 +1,13 @@
 {
   "title": "Anmelden",
   "login": "Anmelden",
+  "register": "Registrieren",
+  "name": "Name",
   "email": "Email",
   "password": "Passwort",
-  "socialAuth": "Weiter mit {{social}}"
+  "socialAuth": "Weiter mit {{social}}",
+  "notRegistered": "Noch keinen Account?",
+  "alreadyRegistered": "Bereits Registriert?",
+  "unauthorized": "Die E-Mail Adresse oder das Passwort ist falsch.",
+  "internal": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie erneut sich anzumelden."
 }

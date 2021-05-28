@@ -30,7 +30,7 @@ export const theme: Theme = {
       default: 'rgb(85, 85, 85)',
       link: '#fff',
       warning: '#fff',
-      error: '#fff'
+      error: '#dc3545'
     },
     background: {
       fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
@@ -55,7 +55,7 @@ export const theme: Theme = {
   },
 
   fontSizes: {
-    small: '0.6rem',
+    small: '0.7rem',
     normal: '0.75rem',
     large: '0.8rem',
     xlarge: '1rem',
