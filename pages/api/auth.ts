@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.redirect(process.env.BACKEND_URL + '/auth/google')
     } catch (error) {
       // TODO handle different error codes
-      res.status(500).json({ error: 'e' })
+      res.status(error.code).json({ code: error.code, message: error.message })
     }
   }
 }

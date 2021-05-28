@@ -8,8 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const response = await getItemList(page, limit, filter, coordinates, radius)
       res.status(200).json(response)
     } catch (error) {
-      // TODO handle different error codes
-      res.status(500).json({ error: 'e' })
+      res.status(error.code).json({ code: error.code, message: error.message })
     }
   }
 }

@@ -30,9 +30,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({ message: 'ok' })
       res.end()
     } catch (error) {
-      // TODO get axios error and return correct code, message
-      res.status(401).json({ error: error.message })
-      res.end()
+      console.log('error in API', error.code, error.message)
+      res.status(error.code).json({ code: error.code, message: error.message })
     }
   }
 }

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getUserDetails } from '../../lib/api/server/login'
 import * as cookie from 'cookie'
 import { tokenNames as n } from '../../lib/global/const'
+import { errorUnauthorized } from '../../lib/global/errors'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
@@ -9,21 +10,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const cookies = cookie.parse(req.headers.cookie)
       const accessToken = cookies[n.ACCESS_TOKEN]
 
-      if (!accessToken) {
-        res.status(401)
-        res.end()
-        return
-      }
+      accessToken || errorUnauthorized('No cookie provided')
 
       let user = await getUserDetails(accessToken)
 
       res.status(200).json({ data: user })
-      res.end()
     } catch (error) {
-      if (error.isAxiosError) res.status(error.response.status).json({ error: error.response.data })
-      else res.status(500).json({ error: error.message })
-
-      res.end()
+      res.status(error.code).json({ code: error.code, message: error.message })
     }
   }
 }

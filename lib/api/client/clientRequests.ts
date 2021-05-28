@@ -6,7 +6,7 @@ import { Item } from '../../common/item.interface'
 import { createURL } from '../utils'
 import { errorByHttpCode } from '../../global/errors'
 
-export function handleFetchErrors(response) {
+export function handleFetchErrors(response: Response) {
   response.ok || errorByHttpCode(response.status, response.statusText)
 
   return response.json()
