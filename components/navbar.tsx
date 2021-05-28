@@ -7,6 +7,7 @@ import Button, { ButtonSize } from './Button'
 
 export default function Navbar() {
   const { t } = useTranslation('common')
+  // user and error can exist on the same time
   const { user, isLoading, isError, mutate } = useUser()
 
   return (
@@ -18,9 +19,11 @@ export default function Navbar() {
           </Link>
         </LeftNav>
         <RightNav>
-          <Button size={ButtonSize.Auto} href='/sell' text={t('sell')}></Button>
+          <Button size={ButtonSize.Auto} href={!isError ? '/sell' : '/login'} text={t('sell')}></Button>
           {isError && !isLoading && <Button size={ButtonSize.Auto} href='/login' text={t('login')}></Button>}
-          {user && !isLoading && <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>}
+          {!isError && user && !isLoading && (
+            <Button size={ButtonSize.Auto} href='/' text={user.data.firstname}></Button>
+          )}
         </RightNav>
       </StyledContainer>
     </StyledNav>
