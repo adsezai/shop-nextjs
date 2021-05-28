@@ -9,14 +9,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const cookies = cookie.parse(req.headers.cookie)
       const accessToken = cookies[n.ACCESS_TOKEN]
 
+      if (!accessToken) {
+        res.status(401)
+        res.end()
+        return
+      }
+
       let user = await getUserDetails(accessToken)
 
       res.status(200).json({ data: user })
       res.end()
     } catch (error) {
-      console.log('Error in User Auth ', error.message)
-      // TODO add propper error handling
-      res.status(500).json({ error: error.message })
+      if (error.isAxiosError) res.status(error.response.status).json({ error: error.response.data })
+      else res.status(500).json({ error: error.message })
+
       res.end()
     }
   }

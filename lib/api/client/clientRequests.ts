@@ -4,11 +4,11 @@ import { User } from '../../common/user.interface'
 import { Item } from '../../common/item.interface'
 
 import { createURL } from '../utils'
+import { errorByHttpCode } from '../../global/errors'
 
 export function handleFetchErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText)
-  }
+  response.ok || errorByHttpCode(response.status, response.statusText)
+
   return response.json()
 }
 
@@ -22,6 +22,18 @@ export async function login(email: string, password: string) {
     },
     body: JSON.stringify({ email, password })
   }).then(handleFetchErrors)
+}
+
+export async function register(name: string, email: string, password: string) {
+  return fetch(createURL('/api/register'), {
+    method: 'POST',
+    credentials: 'include',
+    redirect: 'follow',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, password })
+  })
 }
 
 /**
@@ -52,8 +64,8 @@ export const fetcher = (url: string) =>
 export function useUser() {
   const { data, error, mutate } = useSWR(createURL('/api/user'), fetcher, {
     onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-      // TODO change this to 401 so it does not retry when unautorized
-      if (error.status === 500) return
+      // does not retry when unautorized
+      if (error.status === 401) return
     }
   })
 

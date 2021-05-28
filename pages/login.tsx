@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import useTranslation from 'next-translate/useTranslation'
 
-import { login } from '../lib/api/client/clientRequests'
+import { login, register } from '../lib/api/client/clientRequests'
 import Layout from '../components/Layout'
 import Input from '../components/Input'
 import { FacebookAuthButton, GoogleAuthButton, AuthButton } from '../components/AuthButton'
@@ -29,8 +29,13 @@ export default function Login() {
     e.preventDefault()
     try {
       setLoading(true)
-      await login(email, password)
+      isRegister ? await register(name, email, password) : await login(email, password)
       setLoading(false)
+      /*
+       * //TODO
+       * show hint if register was sucessfull. User must login again after register
+       * or login user directly after login
+       */
       router.push('/')
     } catch (error) {
       setLoading(false)
