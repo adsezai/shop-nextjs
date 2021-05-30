@@ -1,5 +1,7 @@
 # Next.js Shop Project
 
+![test](https://github.com/github/adsezai/shop-nextjs/workflows/test.yaml/badge.svg)
+
 Clone this repository
 
 Run `npm install` to install all dependencies
