@@ -5,6 +5,12 @@ import { login } from '../mocks/db'
 import { server } from '../mocks/server'
 import { SWRConfig, cache } from 'swr'
 
+/**
+ * TODO get the translation with this function and not directly from the json
+ */
+//import getT from 'next-translate/getT'
+import common from '../locales/de/common.json'
+
 /* 
 Re-require modules because the modules keeps the states of the previous test (lazy loaded components)
 The test results are not consistent in this case. See link below for details  
@@ -47,7 +53,7 @@ describe('Test the Navbar Compoennt', () => {
   test('it should render the "Login" Button on error', async () => {
     server.use(
       rest.get(createURL('/api/user'), (req, res, ctx) => {
-        return res(ctx.status(500))
+        return res(ctx.status(401))
       })
     )
 
@@ -59,7 +65,7 @@ describe('Test the Navbar Compoennt', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText('Login')).toBeInTheDocument()
+        expect(screen.getByText(common.login)).toBeInTheDocument()
       },
       { timeout: 30000 }
     )
