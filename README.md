@@ -1,6 +1,6 @@
 # Next.js Shop Project
 
-![test](https://github.com/adsezai/shop-nextjs/workflows/test.yml/badge.svg)
+[![test](https://github.com/adsezai/shop-nextjs/actions/workflows/test.yml/badge.svg)](https://github.com/adsezai/shop-nextjs/actions/workflows/test.yml)
 
 Clone this repository
 
