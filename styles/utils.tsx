@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { flexbox, FlexboxProps, layout, LayoutProps, space, SpaceProps } from 'styled-system'
 
 export const CENTER_VERTICALLY = `
   display: flex;
@@ -41,14 +42,13 @@ export const SpaceSize = {
   mega: 'mega'
 }
 
-export const Box = styled.div<{ width?: string; direction?: string; justify?: string; wrap?: boolean }>`
+export const Box = styled.div<FlexboxProps & LayoutProps & SpaceProps>`
   box-sizing: border-box;
-
   display: flex;
-  flex-direction: ${props => props.direction || 'row'};
-  justify-content: ${props => props.justify || 'flex-start'};
-  flex-wrap: ${props => (props.wrap ? 'wrap' : 'nowrap')};
-  width: 100%;
+  min-width: 0;
+  ${flexbox}
+  ${layout}
+  ${space}
 `
 
 const CenterHorizontallyVertically = ({ children }) => {
