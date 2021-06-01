@@ -81,7 +81,7 @@ const StyledContainer = styled.button`
 
   text-transform: none,
   white-space: nowrap;
-  font-size: ${props => props.theme.fontSizes.normal};
+  font-size: ${props => props.theme.fontSizes.s};
   font-weight: ${props => props.theme.fontWeights.normal};
   text-decoration: none;
   
@@ -98,14 +98,12 @@ const StyledContainer = styled.button`
   
   border-image: initial;
   font-family: inherit;
-
-  
   `
 
 const StyledAuthButton = styled(StyledContainer)`
   border: 1px solid #e1ecf4;
   background: none #48bb78;
-  font-size: ${props => props.theme.fontSizes.normal};
+  font-size: ${props => props.theme.fontSizes.s};
   font-weight: ${props => props.theme.fontWeights.bold};
   color: white;
   line-height: 20px;

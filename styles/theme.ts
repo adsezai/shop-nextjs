@@ -27,7 +27,7 @@ export const theme: Theme = {
       deep: '#fff'
     },
     text: {
-      default: 'rgb(85, 85, 85)',
+      default: '#24292e',
       link: '#fff',
       warning: '#fff',
       error: '#dc3545'
@@ -55,11 +55,12 @@ export const theme: Theme = {
   },
 
   fontSizes: {
-    small: '0.7rem',
-    normal: '0.75rem',
-    large: '0.8rem',
-    xlarge: '1rem',
-    jumbo: '1.2rem'
+    xs: '12px',
+    s: '14px',
+    m: '16px',
+    l: '20px',
+    xl: '24px',
+    xxl: '32px'
   },
 
   lineHeights: {
@@ -71,8 +72,10 @@ export const theme: Theme = {
   },
 
   fontWeights: {
+    light: 300,
     normal: 400,
-    bold: 700
+    semibold: 500,
+    bold: 600
   },
 
   borderRadiuses: {
@@ -123,5 +126,10 @@ export const theme: Theme = {
 }
 
 export const darkTheme = {
-  ...theme
+  colors: {
+    background: {
+      default: '#fff',
+      nav: '#7befb2'
+    }
+  }
 }

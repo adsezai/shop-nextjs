@@ -1,6 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { flexbox, FlexboxProps, layout, LayoutProps, space, SpaceProps } from 'styled-system'
+import {
+  flexbox,
+  FlexboxProps,
+  layout,
+  LayoutProps,
+  space,
+  SpaceProps,
+  color,
+  ColorProps,
+  typography,
+  TypographyProps
+} from 'styled-system'
 
 export const CENTER_VERTICALLY = `
   display: flex;
@@ -42,13 +53,21 @@ export const SpaceSize = {
   mega: 'mega'
 }
 
-export const Box = styled.div<FlexboxProps & LayoutProps & SpaceProps>`
+export const Box = styled.div<FlexboxProps & LayoutProps & SpaceProps & ColorProps>`
   box-sizing: border-box;
   display: flex;
   min-width: 0;
   ${flexbox}
   ${layout}
   ${space}
+  ${color}
+`
+
+export const Text = styled.span<TypographyProps & ColorProps>`
+  color: ${props => props.theme.colors.text.default};
+  margin: 12px 0 0 0;
+  ${typography}
+  ${color}
 `
 
 const CenterHorizontallyVertically = ({ children }) => {

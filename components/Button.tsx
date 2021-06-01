@@ -95,7 +95,7 @@ const StyledContainer = styled.button<ButtonProps>`
   white-space: nowrap;
   user-select: none;
   font-family: inherit;
-  font-size: ${props => props.theme.fontSizes.large};
+  font-size: ${props => props.theme.fontSizes.s};
 `
 
 const IconContainer = styled.div<ButtonProps>`

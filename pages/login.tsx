@@ -7,7 +7,7 @@ import { login, register } from '../lib/api/client/clientRequests'
 import Layout from '../components/Layout'
 import Input from '../components/Input'
 import { FacebookAuthButton, GoogleAuthButton, AuthButton } from '../components/AuthButton'
-import { Space, SpaceSize, Box } from '../styles/utils'
+import { Space, SpaceSize, Box, Text } from '../styles/utils'
 
 export default function Login() {
   const { t } = useTranslation('login')
@@ -46,7 +46,9 @@ export default function Login() {
   return (
     <Layout title='Shop | Login'>
       <Box maxWidth='750px' flexDirection='column' m='0 auto' p='16px'>
-        {isRegister ? t('register') : t('title')}
+        <Text fontSize='l' fontWeight='semibold'>
+          {isRegister ? t('register') : t('title')}
+        </Text>
         <StyledWrapper>
           <LoginContainer>
             <ResponsiveBox resWidth='47%' flexDirection='column'>
@@ -111,13 +113,15 @@ const StyledTextButton = styled.button`
   outline: none;
   background: none;
   font-weight: ${props => props.theme.fontWeights.bold};
+  font-size: ${props => props.theme.fontSizes.s};
   color: #48bb78;
   cursor: pointer;
   text-decoration: underline;
+  padding: 0 6px;
 `
 
 const StyledHint = styled.div`
-  font-size: ${props => props.theme.fontSizes.small};
+  font-size: ${props => props.theme.fontSizes.s};
   :empty::after {
     content: '.';
     visibility: hidden;

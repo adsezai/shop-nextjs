@@ -21,7 +21,7 @@ const StyledInput = styled.input<InputProps>`
   transition: all 0.2s ease 0s;
   font-family: inherit;
   font-weight: 400;
-  font-size: ${props => props.theme.fontSizes.large};
+  font-size: ${props => props.theme.fontSizes.s};
   padding-inline-start: ${props => props.theme.spacing.small};
   padding-inline-end: ${props => props.theme.spacing.small};
   height: 40px;

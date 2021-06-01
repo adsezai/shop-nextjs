@@ -32,7 +32,7 @@ export default function Navbar() {
 
 const StyledA = styled.a`
   font-weight: ${props => props.theme.fontWeights.bold};
-  font-size: ${props => props.theme.fontSizes.jumbo};
+  font-size: ${props => props.theme.fontSizes.xl};
 `
 
 const StyledNav = styled.nav<{}>`

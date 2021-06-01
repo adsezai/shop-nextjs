@@ -4,15 +4,20 @@ import Navbar from './Navbar'
 
 export default function Layout({ children, title }: { children: React.ReactNode; home?: boolean; title?: string }) {
   return (
-    <div>
+    <Application>
       <Head>
         <title>{title || ''}</title>
       </Head>
       <Navbar></Navbar>
       <StyledContainer>{children}</StyledContainer>
-    </div>
+    </Application>
   )
 }
+
+const Application = styled.div`
+  height: 100vh;
+  background-color: ${props => props.theme.colors.background.default};
+`
 
 const StyledContainer = styled.div`
   max-width: 960px;

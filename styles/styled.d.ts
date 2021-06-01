@@ -52,11 +52,12 @@ type Spacing = {
 }
 
 type FontSizes = {
-  small: string
-  normal: string
-  large: string
-  xlarge: string
-  jumbo: string
+  xs: string
+  s: string
+  m: string
+  l: string
+  xl: string
+  xxl: string
 }
 
 type LineHeights = {
@@ -68,7 +69,9 @@ type LineHeights = {
 }
 
 type FontWeights = {
+  light: number
   normal: number
+  semibold: number
   bold: number
 }
 

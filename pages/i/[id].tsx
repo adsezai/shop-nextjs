@@ -5,10 +5,10 @@ import { getItem } from '../../lib/api/server/items'
 import { getUserInfo } from '../../lib/api/server/User'
 import { Item } from '../../lib/common/item.interface'
 import { User } from '../../lib/common/user.interface'
-import user from '../api/user'
-import { CENTER_HORIZONTALLY, CenterHorizontally, CenterVertically } from '../../styles/utils'
+import { CENTER_HORIZONTALLY, CenterHorizontally, CenterVertically, Box, Text } from '../../styles/utils'
 
-import styles from './id.module.css'
+import user from '../api/user'
+
 import styled from 'styled-components'
 
 interface Props {
@@ -21,12 +21,14 @@ export default function ItemPage({ item, user }: Props) {
   return (
     <>
       <Layout title={`Shop | ${item.title}`}>
-        <StyledContainer>
+        <Box flexDirection='column'>
           <ImageBox></ImageBox>
-          <StyledItem>
-            <StyledName>{item.title}</StyledName>
-            <StyledText>{item.price} €</StyledText>
-            <StyledLocation>Location</StyledLocation>
+          <Box flexDirection='column'>
+            <Text fontWeight='bold' fontSize='xl'>
+              {item.title}
+            </Text>
+            <Text fontSize='l'>{item.price} €</Text>
+            <Text fontSize='m'>Location</Text>
 
             <StyledContact>
               <HrDivider />
@@ -58,8 +60,8 @@ export default function ItemPage({ item, user }: Props) {
               </StyledContactApps>
               <HrDivider />
             </StyledContact>
-          </StyledItem>
-        </StyledContainer>
+          </Box>
+        </Box>
       </Layout>
     </>
   )
@@ -85,15 +87,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 }
 
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-const StyledItem = styled.div`
-  padding: 0 16px;
-  margin-top: 20px;
-`
-
 const StyledContact = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,15 +101,7 @@ const StyledText = styled.div`
   font-size: 22px;
   line-height: 36px;
 `
-const StyledName = styled(StyledText)`
-  margin-top: 0px;
-  margin-bottom: 4px;
-`
-const StyledLocation = styled.div`
-  display: inline-block;
-  font-size: 18px;
-  line-height: 36px;
-`
+
 const HrDivider = styled.hr`
   display: block;
   height: 1px;
