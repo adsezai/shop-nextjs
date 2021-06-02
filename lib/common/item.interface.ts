@@ -4,6 +4,7 @@ export interface Item {
   description: string
   viewedBy?: Array<string>
   categories?: Array<string>
+  location?: string
   keywors?: Array<string>
   owner: string
   _id: string

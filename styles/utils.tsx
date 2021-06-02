@@ -63,10 +63,11 @@ export const Box = styled.div<FlexboxProps & LayoutProps & SpaceProps & ColorPro
   ${color}
 `
 
-export const Text = styled.span<TypographyProps & ColorProps>`
+export const Text = styled.span<TypographyProps & ColorProps & SpaceProps>`
   color: ${props => props.theme.colors.text.default};
   margin: 12px 0 0 0;
   ${typography}
+  ${space}
   ${color}
 `
 
