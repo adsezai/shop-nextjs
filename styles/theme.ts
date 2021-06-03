@@ -11,7 +11,7 @@ export const theme: Theme = {
     primary: {
       faded: '#fff',
       faint: '#fff',
-      medium: '#00acc1',
+      medium: '#7befb2',
       deep: '#fff'
     },
     secondary: {

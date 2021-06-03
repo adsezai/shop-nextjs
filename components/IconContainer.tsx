@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export enum IconColor {
   default = 'default',
+  text = 'text',
   primary = 'primary',
   secondary = 'secondary'
 }
@@ -19,8 +20,8 @@ export const ICON_SIZES = {
     height: 16
   },
   small: {
-    width: 20,
-    height: 20
+    width: 24,
+    height: 24
   },
   medium: {
     width: 32,
@@ -41,15 +42,18 @@ const IconContainer = ({ icon, size = IconSize.Medium, color = IconColor.default
   )
 }
 
-const StyledIcon = styled.span<{ size: IconSize; color: IconColor }>`
+const StyledIcon = styled.div<{ size: IconSize; color: IconColor }>`
+  height: ${props => ICON_SIZES[props.size].height}px;
+  width: ${props => ICON_SIZES[props.size].width}px;
   > svg {
     height: ${props => ICON_SIZES[props.size].height}px;
     width: ${props => ICON_SIZES[props.size].width}px;
-    path {
-      ${props => props.color === IconColor.default && `fill: ${props.theme.colors.primary.medium}`}
+    fill: ${props => props.theme.colors.text.default};
+    /* path {
+      ${props => props.color === IconColor.default && `fill: ${props.theme.colors.secondary.medium}`}
       ${props => props.color === IconColor.primary && `fill: ${props.theme.colors.primary.medium}`}
       ${props => props.color === IconColor.secondary && `fill: ${props.theme.colors.secondary.medium}`}
-    }
+    } */
   }
 `
 

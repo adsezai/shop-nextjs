@@ -49,10 +49,11 @@ export default function Home({ itemProps }: Props) {
         <StyledContainer>
           <Button
             disabled={reachedEnd || isRefreshing || isLoadingMore}
-            text={reachedEnd ? t('noMoreData') : t('loadMore')}
-            size={ButtonSize.Auto}
+            size={ButtonSize.Medium}
             onClick={() => setSize(size + 1)}
-          ></Button>
+          >
+            {reachedEnd ? t('noMoreData') : t('loadMore')}
+          </Button>
         </StyledContainer>
       </Layout>
     </>

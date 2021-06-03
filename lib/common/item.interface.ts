@@ -10,5 +10,6 @@ export interface Item {
   _id: string
   originalPrice: string
   createDate: string
+  imageUrls: Array<string>
   __v?: number
 }

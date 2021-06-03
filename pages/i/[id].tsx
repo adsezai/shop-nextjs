@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next'
 import styled from 'styled-components'
+import useTranslation from 'next-translate/useTranslation'
 
 import Layout from '../../components/Layout'
 import ImageBox from '../../components/ImageBox'
@@ -7,15 +8,12 @@ import { getItem } from '../../lib/api/server/items'
 import { getUserInfo } from '../../lib/api/server/User'
 import { Item } from '../../lib/common/item.interface'
 import { User } from '../../lib/common/user.interface'
-import {
-  CENTER_HORIZONTALLY,
-  CenterHorizontally,
-  CenterVertically,
-  Box,
-  Text,
-  Space,
-  SpaceSize
-} from '../../styles/utils'
+import { CenterHorizontally, Box, Text, Space, SpaceSize } from '../../styles/utils'
+import Button, { ButtonSize } from '../../components/Button'
+import IconContainer, { IconSize, IconColor } from '../../components/IconContainer'
+
+import PhoneIcon from '../../public/icons/phone.svg'
+import LocationIcon from '../../public/icons/location.svg'
 
 interface Props {
   item: Item
@@ -24,12 +22,13 @@ interface Props {
 
 // TODO Handle case if request to item or user had an error
 export default function ItemPage({ item, user }: Props) {
+  const { t } = useTranslation('i')
   return (
     <>
       <Layout title={`Shop | ${item.title}`}>
         <ItemContainer margin='0 auto' flexDirection='column'>
           <ResponsiveBox resWidth='47%' flexDirection='column'>
-            <ImageBox></ImageBox>
+            <ImageBox images={item.imageUrls}></ImageBox>
           </ResponsiveBox>
           <ResponsiveBox resWidth='6%'></ResponsiveBox>
           <ResponsiveBox resWidth='47%' flexDirection='column' flex='1 1 auto'>
@@ -39,8 +38,24 @@ export default function ItemPage({ item, user }: Props) {
             <Text fontSize='xl' marginTop='3px' fontWeight='bold'>
               {item.price} €
             </Text>
-            <Text fontSize='m'>{item.location}</Text>
+            <Box alignItems='center' mt='12px'>
+              <IconContainer icon={<LocationIcon />} size={IconSize.Small}></IconContainer>
+              <Text fontSize='m' m='0' ml='5px'>
+                {item.location}
+              </Text>
+            </Box>
             <Text fontSize='m'>{item.description}</Text>
+            <Space x={SpaceSize.large} y={SpaceSize.large}></Space>
+            <Space x={SpaceSize.large} y={SpaceSize.large}></Space>
+            <Box>
+              <Button bg='primary.medium' size={ButtonSize.Large} width='50%'>
+                Call
+              </Button>
+              <Space x={SpaceSize.medium}></Space>
+              <Button bg='primary.medium' size={ButtonSize.Large} width='50%'>
+                Chat
+              </Button>
+            </Box>
             <Space x={SpaceSize.large} y={SpaceSize.large}></Space>
             <StyledContact>
               <HrDivider />
@@ -57,6 +72,10 @@ export default function ItemPage({ item, user }: Props) {
               </CenterHorizontally>
               <HrDivider />
             </StyledContact>
+
+            <Text>
+              {t('onlineSince')} {new Date(item.createDate).toLocaleDateString()}
+            </Text>
           </ResponsiveBox>
         </ItemContainer>
       </Layout>

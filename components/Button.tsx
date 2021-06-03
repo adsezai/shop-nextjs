@@ -1,113 +1,67 @@
 import React from 'react'
 import { CENTER_VERTICALLY } from '../styles/utils'
 import styled from 'styled-components'
-import Link from 'next/link'
-import { ICON_SIZES } from './IconContainer'
-
-type ButtonProps = {
-  size?: ButtonSize
-  text?: string
-  name?: string
-  disabled?: boolean
-  href?: string
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  icon?: React.ReactNode
-}
+import { layout, LayoutProps, color, ColorProps } from 'styled-system'
 
 export enum ButtonSize {
   Small = 'small',
   Medium = 'medium',
-  Large = 'large',
-  Auto = 'auto'
+  Large = 'large'
 }
 
 const BUTTON_SIZES = {
   small: {
-    icon: ICON_SIZES.small,
-    iconContainer: {
-      width: 38,
-      height: 38
+    size: {
+      width: 'auto',
+      height: '30px',
+      fontSize: '14px'
     }
   },
   medium: {
-    icon: ICON_SIZES.medium,
-    iconContainer: {
-      width: 44,
-      height: 44
+    size: {
+      width: 'auto',
+      height: '32px',
+      fontSize: '16px'
     }
   },
-  auto: {
-    icon: ICON_SIZES.medium,
-    iconContainer: {
+  large: {
+    size: {
       width: 'auto',
-      height: 30
+      height: '38px',
+      fontSize: '16px'
     }
   }
 }
 
-const Button = ({ size = ButtonSize.Medium, text, disabled, href, icon, onClick }: ButtonProps) => {
-  return (
-    <Container disabled={disabled} size={size} href={href} onClick={onClick}>
-      {icon && <IconContainer size={size}>{icon}</IconContainer>}
-      {text}
-    </Container>
-  )
+type ButtonProps = {
+  size?: string
 }
 
-const Container = ({ children, disabled, size, href, onClick }) => {
-  if (href) {
-    return (
-      <Link href={href} passHref>
-        <StyledAnchor>
-          <StyledContainer disabled={disabled} size={size}>
-            {children}
-          </StyledContainer>
-        </StyledAnchor>
-      </Link>
-    )
-  }
-
-  return (
-    <StyledContainer disabled={disabled} size={size} onClick={onClick}>
-      {children}
-    </StyledContainer>
-  )
-}
-
-const StyledContainer = styled.button<ButtonProps>`
+const Button = styled.button<ButtonProps & LayoutProps & ColorProps>`
   cursor: pointer;
   border-radius: ${props => props.theme.borderRadiuses.pill};
   border: none;
-  height: ${props => BUTTON_SIZES[props.size].iconContainer.height}px;
-  width: ${props => BUTTON_SIZES[props.size].iconContainer.width}px;
+  height: ${props => props.size && BUTTON_SIZES[props.size].size.height};
+  width: ${props => props.size && BUTTON_SIZES[props.size].size.width};
   padding: 5px 12px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-weight: ${props => props.theme.fontWeights.bold};
   background: ${props => props.theme.colors.secondary.medium};
   &:hover {
   }
   ${props =>
     props.disabled &&
     `cursor: default;
-  `};
+    `};
   white-space: nowrap;
   user-select: none;
   font-family: inherit;
-  font-size: ${props => props.theme.fontSizes.s};
-`
-
-const IconContainer = styled.div<ButtonProps>`
-  ${CENTER_VERTICALLY}
-  > svg {
-    margin: auto;
-    height: ${props => BUTTON_SIZES[props.size].icon.height}px;
-    width: ${props => BUTTON_SIZES[props.size].icon.width}px;
-  }
-`
-const StyledAnchor = styled.a`
-  text-decoration: none;
+  font-weight: ${props => props.theme.fontWeights.bold};
+  font-size: ${props => props.size && BUTTON_SIZES[props.size].size.fontSize};
+  vertical-align: middle;
+  ${layout}
+  ${color}
 `
 
 export default Button

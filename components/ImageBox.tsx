@@ -2,17 +2,18 @@ import { Item } from '../lib/common/item.interface'
 import { Box, Space, SpaceSize } from '../styles/utils'
 import styled from 'styled-components'
 
-export default function ImageBox() {
+export default function ImageBox({ images }: { images: Array<string> }) {
   return (
     <Box flexDirection='column'>
       <ImageContainer src='https://picsum.photos/400/300' alt='img'></ImageContainer>
       <Space y={SpaceSize.xs} x={SpaceSize.medium}></Space>
       <Box>
-        <Thumbnail src='https://picsum.photos/40/40' alt='preview'></Thumbnail>
-        <Space y={SpaceSize.xs} x={SpaceSize.xs}></Space>
-        <Thumbnail src='https://picsum.photos/40/40' alt='preview'></Thumbnail>
-        <Space y={SpaceSize.xs} x={SpaceSize.xs}></Space>
-        <Thumbnail src='https://picsum.photos/40/40' alt='preview'></Thumbnail>
+        {images.map(i => (
+          <>
+            <Thumbnail src={i} alt='preview'></Thumbnail>
+            <Space y={SpaceSize.xs} x={SpaceSize.xs}></Space>
+          </>
+        ))}
       </Box>
     </Box>
   )
