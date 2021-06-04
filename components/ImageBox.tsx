@@ -1,4 +1,3 @@
-import { Item } from '../lib/common/item.interface'
 import { Box, Space, SpaceSize } from '../styles/utils'
 import styled from 'styled-components'
 
@@ -9,10 +8,9 @@ export default function ImageBox({ images }: { images: Array<string> }) {
       <Space y={SpaceSize.xs} x={SpaceSize.medium}></Space>
       <Box>
         {images.map(i => (
-          <>
+          <Box key={i} mr='10px'>
             <Thumbnail src={i} alt='preview'></Thumbnail>
-            <Space y={SpaceSize.xs} x={SpaceSize.xs}></Space>
-          </>
+          </Box>
         ))}
       </Box>
     </Box>

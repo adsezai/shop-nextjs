@@ -13,6 +13,7 @@ import Button, { ButtonSize } from '../../components/Button'
 import IconContainer, { IconSize, IconColor } from '../../components/IconContainer'
 
 import PhoneIcon from '../../public/icons/phone.svg'
+import ChatIcon from '../../public/icons/chat.svg'
 import LocationIcon from '../../public/icons/location.svg'
 
 interface Props {
@@ -49,10 +50,12 @@ export default function ItemPage({ item, user }: Props) {
             <Space x={SpaceSize.large} y={SpaceSize.large}></Space>
             <Box>
               <Button bg='primary.medium' size={ButtonSize.Large} width='50%'>
+                <IconContainer m='0 5px 0 0' icon={<PhoneIcon />} size={IconSize.Small}></IconContainer>
                 Call
               </Button>
               <Space x={SpaceSize.medium}></Space>
               <Button bg='primary.medium' size={ButtonSize.Large} width='50%'>
+                <IconContainer m='0 5px 0 0' icon={<ChatIcon />} size={IconSize.Small}></IconContainer>
                 Chat
               </Button>
             </Box>

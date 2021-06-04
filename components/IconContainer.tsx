@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { space } from 'styled-system'
 
 export enum IconColor {
   default = 'default',
@@ -8,22 +9,21 @@ export enum IconColor {
   secondary = 'secondary'
 }
 export enum IconSize {
-  Xsmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
   Large = 'large'
 }
 
 export const ICON_SIZES = {
-  xsmall: {
-    width: 16,
-    height: 16
-  },
   small: {
     width: 24,
     height: 24
   },
   medium: {
+    width: 28,
+    height: 28
+  },
+  large: {
     width: 32,
     height: 32
   }
@@ -33,16 +33,17 @@ type IconContainerProps = {
   icon: React.ReactNode
   size?: IconSize
   color?: IconColor
+  m?: string
 }
-const IconContainer = ({ icon, size = IconSize.Medium, color = IconColor.default }: IconContainerProps) => {
+const IconContainer = ({ icon, size = IconSize.Medium, color = IconColor.default, m }: IconContainerProps) => {
   return (
-    <StyledIcon size={size} color={color}>
+    <StyledIcon size={size} color={color} m={m}>
       {icon}
     </StyledIcon>
   )
 }
 
-const StyledIcon = styled.div<{ size: IconSize; color: IconColor }>`
+const StyledIcon = styled.div<{ size: IconSize; color: IconColor; m: string }>`
   height: ${props => ICON_SIZES[props.size].height}px;
   width: ${props => ICON_SIZES[props.size].width}px;
   > svg {
@@ -55,6 +56,7 @@ const StyledIcon = styled.div<{ size: IconSize; color: IconColor }>`
       ${props => props.color === IconColor.secondary && `fill: ${props.theme.colors.secondary.medium}`}
     } */
   }
+  ${space}
 `
 
 export default IconContainer
