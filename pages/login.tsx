@@ -34,7 +34,7 @@ export default function Login() {
       /*
        * //TODO
        * show hint if register was sucessfull. User must login again after register
-       * or login user directly after login
+       * or login user directly after register
        */
       router.push('/')
     } catch (error) {
