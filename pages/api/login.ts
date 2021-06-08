@@ -1,20 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+
 import { login } from '../../lib/api/server/login'
-import * as cookie from 'cookie'
 import { tokenNames as n } from '../../lib/global/const'
+import { createCookie } from '../../lib/api/utils'
 
 interface Tokens {
   refreshToken: string
   accessToken: string
-}
-
-function createCookie(name: string, value: string, path?: string): string {
-  return cookie.serialize(name, value, {
-    httpOnly: true,
-    path: path || '/',
-    sameSite: 'lax',
-    secure: false // TODO change to true (only sends over https if true)
-  })
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
