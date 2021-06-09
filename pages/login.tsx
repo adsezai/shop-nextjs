@@ -46,7 +46,7 @@ export default function Login() {
   return (
     <Layout title='Shop | Login'>
       <Box maxWidth='750px' flexDirection='column' m='0 auto' p='16px'>
-        <Text fontSize='l' fontWeight='semibold'>
+        <Text fontSize='l' fontWeight='semibold' mt='0'>
           {isRegister ? t('register') : t('title')}
         </Text>
         <StyledWrapper>

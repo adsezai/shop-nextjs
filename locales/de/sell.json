@@ -1,3 +1,7 @@
 {
-  "title": "Verkaufen"
+  "title": "Verkaufen",
+  "publish": "Veröffentlichen",
+  "titleInput": "Titel",
+  "priceInput": "Preis",
+  "descriptionInput": "Beschreibung"
 }

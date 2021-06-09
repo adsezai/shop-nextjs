@@ -5,11 +5,12 @@ type InputProps = {
   placeholder?: string
   value?: string
   onChange(e: React.ChangeEvent<HTMLInputElement>): void
+  as?: any
 }
 
-const Input = ({ type = 'text', placeholder, value, onChange }: InputProps) => {
-  return <StyledInput type={type} value={value} placeholder={placeholder} onChange={onChange}></StyledInput>
-}
+/* const Input = ({ type = 'text', placeholder, value, onChange, as }: InputProps) => {
+  return <StyledInput as={as} type={type} value={value} placeholder={placeholder} onChange={onChange}></StyledInput>
+} */
 
 const StyledInput = styled.input<InputProps>`
   width: 100%;
@@ -32,4 +33,4 @@ const StyledInput = styled.input<InputProps>`
   border-color: ${props => props.theme.colors.borders.lightgray};
   background: inherit;
 `
-export default Input
+export default StyledInput
