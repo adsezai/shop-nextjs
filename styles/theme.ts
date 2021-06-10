@@ -34,7 +34,7 @@ export const theme: Theme = {
     },
     background: {
       fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
-      default: '#fff',
+      default: '#fff', //rgb(247, 248, 247)
       nav: '#7befb2'
     },
     borders: {

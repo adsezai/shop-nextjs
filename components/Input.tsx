@@ -1,19 +1,41 @@
 import styled from 'styled-components'
+import { SpaceSize, Space } from '../styles/utils'
+import { size, SizeProps } from 'styled-system'
 
 type InputProps = {
   type?: string
   placeholder?: string
   value?: string
+  label?: string
   onChange(e: React.ChangeEvent<HTMLInputElement>): void
   as?: any
+  width?: string
 }
 
-/* const Input = ({ type = 'text', placeholder, value, onChange, as }: InputProps) => {
-  return <StyledInput as={as} type={type} value={value} placeholder={placeholder} onChange={onChange}></StyledInput>
-} */
+const Input = ({ label, type = 'text', placeholder, value, onChange, as, width }: InputProps) => {
+  return (
+    <StyledLabel>
+      {label}
+      {label && <Space y={SpaceSize.micro} />}
+      <StyledInput
+        width={width}
+        as={as}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+      ></StyledInput>
+    </StyledLabel>
+  )
+}
+
+const StyledLabel = styled.label`
+  color: ${props => props.theme.colors.text.default};
+  font-size: ${props => props.theme.fontSizes.m};
+`
 
 const StyledInput = styled.input<InputProps>`
-  width: 100%;
+  width: ${props => props.width || '100%'};
   min-width: 0px;
   outline: transparent solid 2px;
   outline-offset: 2px;
@@ -22,7 +44,7 @@ const StyledInput = styled.input<InputProps>`
   transition: all 0.2s ease 0s;
   font-family: inherit;
   font-weight: 400;
-  font-size: ${props => props.theme.fontSizes.s};
+  font-size: ${props => props.theme.fontSizes.m};
   padding-inline-start: ${props => props.theme.spacing.small};
   padding-inline-end: ${props => props.theme.spacing.small};
   height: 40px;
@@ -33,4 +55,4 @@ const StyledInput = styled.input<InputProps>`
   border-color: ${props => props.theme.colors.borders.lightgray};
   background: inherit;
 `
-export default StyledInput
+export default Input
