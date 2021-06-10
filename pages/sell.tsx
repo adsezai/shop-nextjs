@@ -9,15 +9,17 @@ import ImageUpload from '../components/ImageUpload'
 import { Text } from '../styles/utils'
 import { useState } from 'react'
 import Button from '../components/Button'
+import Select from '../components/Select'
 
 export default function Sell({}) {
   const { t } = useTranslation('sell')
 
   const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
+  const [price, setPrice] = useState('') // ^(\d+(?:[\.\,]\d{0,2})?)$
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [location, setLocation] = useState('')
+  const [currency, setCurrency] = useState('')
 
   return (
     <>
@@ -29,7 +31,7 @@ export default function Sell({}) {
           <Card flexDirection='column' mt='15px'>
             <ImageUpload title={t('imageUpload')} />
           </Card>
-          <Card marginY='20px' flexDirection='column'>
+          <Card mt='20px' flexDirection='column'>
             <Input
               label={t('titleInput')}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setTitle(e.target.value)}
@@ -44,22 +46,41 @@ export default function Sell({}) {
               value={description}
             />
             <Space y={SpaceSize.medium}></Space>
-            <Input
-              width='auto'
-              label={t('priceInput')}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setPrice(e.target.value)}
-              type='number'
-              value={price}
-            />
+            <Box alignItems='flex-end'>
+              <Input
+                width='auto'
+                label={t('priceInput')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setPrice(e.target.value)}
+                type='number'
+                placeholder={t('priceInput')}
+                value={price}
+              />
+              <Space x={SpaceSize.medium} />
+              <Select
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setCurrency(e.target.value)}
+                label=' '
+                value={currency}
+              >
+                <option value='eur'>EUR</option>
+                <option value='usd'>USD</option>
+              </Select>
+            </Box>
           </Card>
-          <Card marginY='20px' flexDirection='column'>
-            <Input
-              width='auto'
+          <Card mt='20px' flexDirection='column'>
+            <Select
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setCategory(e.target.value)}
               label={t('categoryInput')}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setCategory(e.target.value)}
-              placeholder={t('categoryInput')}
               value={category}
-            />
+            >
+              {(t('common:categories', null, { returnObjects: true }) as Array<any>).map(obj => {
+                const key = Object.keys(obj)[0]
+                return (
+                  <option key={key} value={key}>
+                    {obj[key]}
+                  </option>
+                )
+              })}
+            </Select>
             <Space y={SpaceSize.medium}></Space>
             <Input
               label={t('locationInput')}
@@ -68,7 +89,7 @@ export default function Sell({}) {
               value={location}
             />
           </Card>
-          <Box justifyContent='flex-end' mt='10px'>
+          <Box justifyContent='flex-end' mt='20px'>
             <Button size='medium'>{t('publish')}</Button>
           </Box>
         </Box>

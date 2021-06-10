@@ -1,4 +1,18 @@
 {
   "sell": "Verkaufen",
-  "login": "Anmelden"
+  "login": "Anmelden",
+  "categories": [
+    {
+      "car": "Auto"
+    },
+    {
+      "technology": "Technologie"
+    },
+    {
+      "fashion": "Mode"
+    },
+    {
+      "living": "Wohnen"
+    }
+  ]
 }
