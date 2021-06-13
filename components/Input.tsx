@@ -10,20 +10,24 @@ type InputProps = {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void
   as?: any
   width?: string
+  required?: boolean
+  name?: string
 }
 
-const Input = ({ label, type = 'text', placeholder, value, onChange, as, width }: InputProps) => {
+const Input = ({ name, label, type = 'text', placeholder, value, onChange, as, width, required }: InputProps) => {
   return (
     <StyledLabel>
       {label}
       {label && <Space y={SpaceSize.micro} />}
       <StyledInput
+        name={name}
         width={width}
         as={as}
         type={type}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        required={required}
       ></StyledInput>
     </StyledLabel>
   )

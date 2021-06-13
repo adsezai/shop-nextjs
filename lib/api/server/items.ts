@@ -1,4 +1,5 @@
 import axios from './axios'
+//import axios from 'axios'
 
 export async function getItemList(
   page: number | string | string[],
@@ -8,7 +9,7 @@ export async function getItemList(
   radius: any
 ) {
   const res = await axios.post(
-    'items/page',
+    '/items/page',
     {
       searchOptions: {
         page,
@@ -28,6 +29,25 @@ export async function getItemList(
 }
 
 export async function getItem(id: string | string[]) {
-  const res = await axios.get(`items/item/${id}`)
+  const res = await axios.get(`/items/item/${id}`)
+  return res.data
+}
+
+export async function addItem(body, accessToken: string) {
+  const res = await axios.post(`/items/item`, body, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+  return res.data
+}
+
+export async function addItemImage(formData: any, accessToken: string) {
+  const res = await axios({
+    url: `/items/image/`,
+    method: 'POST',
+    headers: { ...formData.getHeaders(), Authorization: `Bearer ${accessToken}` },
+    data: formData
+  })
   return res.data
 }

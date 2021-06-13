@@ -6,14 +6,15 @@ type SelectProps = {
   children: React.ReactElement | Array<React.ReactElement>
   onChange(e: React.ChangeEvent<HTMLSelectElement>): void
   value?: string
+  name?: string
 }
 
-const Select = ({ label, children, onChange, value }: SelectProps) => {
+const Select = ({ name, label, children, onChange, value }: SelectProps) => {
   return (
     <StyledLabel>
       {label}
       {label && <Space y={SpaceSize.micro} />}
-      <StyledSelect value={value} onChange={onChange}>
+      <StyledSelect name={name} value={value} onChange={onChange}>
         {children}
       </StyledSelect>
     </StyledLabel>

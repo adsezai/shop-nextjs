@@ -47,7 +47,14 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
       <RelativeWrapper>
         <Dropzone>
           <ImageIcon />
-          <StyledFileUpload type='file' multiple accept='image/png, image/jpeg' required onChange={handleChange} />
+          <StyledFileUpload
+            type='file'
+            name='image'
+            multiple
+            accept='image/png, image/jpeg'
+            required
+            onChange={handleChange}
+          />
         </Dropzone>
       </RelativeWrapper>
       <Space y={SpaceSize.large} />

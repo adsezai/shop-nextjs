@@ -12,6 +12,24 @@ export function handleFetchErrors(response: Response) {
   return response.json()
 }
 
+export async function addItemData(data: any) {
+  return fetch(createURL('/api/additem'), {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ ...data })
+  }).then(handleFetchErrors)
+}
+
+export async function addItemImages(itemid: string, formData: FormData) {
+  return fetch(createURL('/api/addimages') + `?${new URLSearchParams({ itemid })}`, {
+    method: 'POST',
+    body: formData
+  }).then(handleFetchErrors)
+}
+
 export async function login(email: string, password: string) {
   return fetch(createURL('/api/login'), {
     method: 'POST',

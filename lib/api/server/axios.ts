@@ -14,8 +14,7 @@ instance.interceptors.response.use(
     // TODO log errors
     if (error.response) {
       // Request made and server responded with error
-      console.log(JSON.stringify(error.response.data))
-      errorByHttpCode(error.response.status, error.response.data.message || '')
+      errorByHttpCode(error.response.status, JSON.stringify(error.response.data.message) || '')
     } else if (error.request) {
       // The request was made but no response was received
       errorByHttpCode(500, error.message || '')
