@@ -1,5 +1,4 @@
 import axios from './axios'
-//import axios from 'axios'
 
 export async function getItemList(
   page: number | string | string[],
@@ -48,6 +47,19 @@ export async function addItemImage(formData: any, accessToken: string) {
     method: 'POST',
     headers: { ...formData.getHeaders(), Authorization: `Bearer ${accessToken}` },
     data: formData
+  })
+  return res.data
+}
+
+export async function addItemImageStream(req: any, itemid: string | string[], accessToken: string) {
+  const res = await axios({
+    url: `/items/image/`,
+    method: 'POST',
+    headers: { ...req.headers, Authorization: `Bearer ${accessToken}` },
+    params: {
+      itemid
+    },
+    data: req
   })
   return res.data
 }

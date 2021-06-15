@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { addItemImage } from '../../lib/api/server/items'
+import { addItemImage, addItemImageStream } from '../../lib/api/server/items'
 import { tokenNames as n } from '../../lib/global/const'
 import * as cookie from 'cookie'
 import { pipeline as pLine } from 'stream'
@@ -11,6 +11,23 @@ const pipeline = promisify(pLine)
 const Busboy = require('busboy')
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === 'POST') {
+    const { itemid } = req.query
+
+    const cookies = cookie.parse(req.headers.cookie)
+    const accessToken = cookies[n.ACCESS_TOKEN]
+
+    try {
+      const uploadResult = await addItemImageStream(req, itemid, accessToken)
+      res.status(200).json(uploadResult)
+    } catch (error) {
+      res.status(error.code).json({ code: error.code, message: error.message })
+    }
+  }
+}
+
+// old method to upload single files to backend
+/* export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { itemid } = req.query
 
@@ -61,7 +78,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(error.code).send(error.message)
       })
   }
-}
+} */
 
 export const config = {
   api: {
