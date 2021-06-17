@@ -1,34 +1,44 @@
-import { Box, Space, SpaceSize } from '../styles/utils'
+import Image from 'next/image'
 import styled from 'styled-components'
+import { Box, Space, SpaceSize } from '../styles/utils'
 
 export default function ImageBox({ images }: { images: Array<string> }) {
   return (
     <Box flexDirection='column'>
-      <ImageContainer src='https://picsum.photos/400/300' alt='img'></ImageContainer>
-      <Space y={SpaceSize.xs} x={SpaceSize.medium}></Space>
+      <ImageContainer>
+        <Image
+          layout='fill'
+          objectFit='contain'
+          src={`https://adsezaistorage.blob.core.windows.net/adsezai/${images[0]}`}
+        ></Image>
+      </ImageContainer>
+      <Space y={SpaceSize.medium} x={SpaceSize.medium}></Space>
       <Box>
-        {images.map(i => (
-          <Box key={i} mr='10px'>
-            <Thumbnail src={i} alt='preview'></Thumbnail>
-          </Box>
-        ))}
+        {images.map(
+          (i, index) =>
+            index > 0 && (
+              <Thumbnail key={i} mr='10px'>
+                <Image
+                  src={`https://adsezaistorage.blob.core.windows.net/adsezai/${i}`}
+                  height='70px'
+                  width='70px'
+                  objectFit='cover'
+                ></Image>
+              </Thumbnail>
+            )
+        )}
       </Box>
     </Box>
   )
 }
 
-const Thumbnail = styled.img`
-  object-fit: cover;
-  user-select: none;
-  height: 60px;
-  width: 60px;
-  border-radius: 5px;
+const ImageContainer = styled(Box)`
+  position: relative;
+  height: 400px;
 `
-
-const ImageContainer = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  user-select: none;
-  border-radius: 5px;
+const Thumbnail = styled(Box)`
+  & img {
+    user-select: none;
+    border-radius: 5px;
+  }
 `

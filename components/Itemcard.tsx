@@ -1,16 +1,24 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from './itemcard.module.css'
 import { Item } from '../lib/common/item.interface'
 import styled from 'styled-components'
 
 export default function Itemcard({ item }: { item: Item }) {
+  console.log(item)
   return (
     <StyledContainer>
       <Link href={`/i/${item._id}`}>
         <StyledCard>
           <StyledContent>
             <StyledImagecontent>
-              <StyledImage src='https://via.placeholder.com/150' alt='img'></StyledImage>
+              <Image
+                layout='fill'
+                objectFit='cover'
+                src={`https://adsezaistorage.blob.core.windows.net/adsezai/${
+                  item.imageUrls ? item.imageUrls[0] : 'placeholder'
+                }`}
+              ></Image>
             </StyledImagecontent>
             <StyledItemcontent>
               <StyledText>{item.title}</StyledText>
@@ -90,12 +98,12 @@ const StyledContent = styled.div`
 `
 const StyledImagecontent = styled.div`
   border-radius: 12px 12px 0px 0px;
-`
-const StyledImage = styled.img`
-  object-fit: cover;
+  position: relative;
   width: 100%;
-  height: 100%;
-  border-radius: 12px 12px 0px 0px;
+  height: 210px;
+  & img {
+    border-radius: 12px 12px 0px 0px;
+  }
 `
 
 const StyledItemcontent = styled.div`
