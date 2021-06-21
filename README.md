@@ -1,8 +1,25 @@
 # Next.js Shop Project
 
+
 [![test](https://github.com/adsezai/shop-nextjs/actions/workflows/test.yml/badge.svg)](https://github.com/adsezai/shop-nextjs/actions/workflows/test.yml)
 
-Clone this repository
+## Introduction
+
+This repository is the frontend code of a online shop project.
+
+The backend code can be found here: [NodeJs Backend](https://github.com/adsezai/shop-backend)
+
+[<img src="https://adsezaistorage.blob.core.windows.net/adsezai/shop-index.PNG">](https://adsezaistorage.blob.core.windows.net/adsezai/shop-index.PNG)
+
+[<img src="https://adsezaistorage.blob.core.windows.net/adsezai/shop-item.PNG">](https://adsezaistorage.blob.core.windows.net/adsezai/shop-index.PNG)
+
+[<img src="https://adsezaistorage.blob.core.windows.net/adsezai/shop-login.PNG">](https://adsezaistorage.blob.core.windows.net/adsezai/shop-index.PNG)
+
+[<img src="https://adsezaistorage.blob.core.windows.net/adsezai/shop-verkaufen.PNG">](https://adsezaistorage.blob.core.windows.net/adsezai/shop-index.PNG)
+
+## Installation
+
+To run the project clone this repository
 
 Run `npm install` to install all dependencies
 

@@ -32,7 +32,6 @@ export default function Sell({}) {
       currency
     }
 
-    // Only submit Images
     const formData = new FormData(e.currentTarget)
     const submitForm = new FormData()
     const formImages = formData.getAll('image')

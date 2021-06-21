@@ -15,7 +15,7 @@ import { fetcher } from '../lib/api/client/clientRequests'
 import { Item } from '../lib/common/item.interface'
 import { User } from '../lib/common/user.interface'
 
-const PAGE_LIMIT = 5
+const PAGE_LIMIT = 8
 
 const getKey = (pageIndex, previousePageData) => {
   if (previousePageData && !previousePageData.length) return null
