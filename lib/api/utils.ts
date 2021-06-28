@@ -9,6 +9,12 @@ export function createURL(path: string) {
   return process.env.NEXT_PUBLIC_API_MOCKING === 'enabled' ? new URL(path, 'http://localhost:3000').href : path
 }
 
+export function createImageURL(id: string) {
+  return process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
+    ? `https://picsum.photos/500/500`
+    : `https://adsezaistorage.blob.core.windows.net/adsezai/${id}`
+}
+
 export function createCookie(name: string, value: string, path?: string): string {
   return cookie.serialize(name, value, {
     httpOnly: true,

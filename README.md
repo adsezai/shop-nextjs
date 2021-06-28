@@ -21,9 +21,9 @@ The backend code can be found here: [NodeJs Backend](https://github.com/adsezai/
 
 To run the project clone this repository
 
-Run `npm install` to install all dependencies
+1 ) Run `npm install` to install all dependencies
 
-Add a `.env.local` file to the project root.
+2 ) Add a `.env.local` file to the project root.
 
 ```bash
 NEXT_PUBLIC_API_MOCKING=enabled
@@ -34,6 +34,8 @@ BACKEND_URL=http://localhost:7070
 Backend Request will be send to `BACKEND_URL` but they will be intercepted by the msw service worker in the browser.\
 To disable the mocked data set `NEXT_PUBLIC_API_MOCKING` to `disabled`.
 
-Run `npm run dev` to start the app.
+3 ) Run `npm run dev` to start the app.
 
 The app runs on [http://localhost:3000](http://localhost:3000)
+
+*If `NEXT_PUBLIC_API_MOCKING` is set to `enabled` random items will be loaded. Also `swr` will constantly fetch new results and the items will change.*

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './itemcard.module.css'
 import { Item } from '../lib/common/item.interface'
+import { createImageURL } from '../lib/api/utils'
 import styled from 'styled-components'
 
 export default function Itemcard({ item }: { item: Item }) {
@@ -15,9 +16,7 @@ export default function Itemcard({ item }: { item: Item }) {
               <Image
                 layout='fill'
                 objectFit='cover'
-                src={`https://adsezaistorage.blob.core.windows.net/adsezai/${
-                  item.imageUrls ? item.imageUrls[0] : 'placeholder'
-                }`}
+                src={createImageURL(item.imageUrls ? item.imageUrls[0] : '')}
               ></Image>
             </StyledImagecontent>
             <StyledItemcontent>
