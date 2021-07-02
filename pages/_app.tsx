@@ -6,6 +6,7 @@ import { darkTheme, theme } from '../styles/theme'
 
 import '../styles/reset.css'
 import '../styles/global.css'
+import 'swiper/swiper-bundle.min.css'
 
 console.log('NEXT_PUBLIC_API_MOCKING is enabled:', process.env.NEXT_PUBLIC_API_MOCKING === 'enabled')
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
