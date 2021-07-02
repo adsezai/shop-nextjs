@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <Layout title='Shop | Login'>
-      <Box maxWidth='750px' flexDirection='column' m='0 auto' p='16px' pt='0'>
+      <Box maxWidth='750px' flexDirection='column' m='0 auto'>
         <Text fontSize='l' fontWeight='semibold' mt='0'>
           {isRegister ? t('register') : t('title')}
         </Text>

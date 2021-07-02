@@ -8,5 +8,4 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
-  padding: 0 16px;
 `
