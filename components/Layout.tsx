@@ -22,7 +22,7 @@ const Application = styled.div`
 const StyledContainer = styled.div`
   max-width: 960px;
   margin: 0 auto;
-  padding: 30px 0;
+  padding: 30px 16px;
   @media (min-width: ${props => props.theme.breakpoints.mobileL}) {
     max-width: ${props => props.theme.breakpoints.mobileL};
   }

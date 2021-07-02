@@ -44,7 +44,7 @@ export default function Sell({}) {
     <>
       <Layout title='Shop | Sell'>
         <form noValidate onSubmit={handleSubmit}>
-          <Box maxWidth='750px' flexDirection='column' m='0 auto' p='16px' pt='0'>
+          <Box maxWidth='750px' flexDirection='column' m='0 auto' pt='0'>
             <Text fontSize='l' fontWeight='semibold' mt='0'>
               {t('title')}
             </Text>
