@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getItemList } from '../../lib/api/server/items'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function authApi(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
       res.redirect(process.env.BACKEND_URL + '/auth/google')

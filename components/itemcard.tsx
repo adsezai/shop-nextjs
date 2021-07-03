@@ -6,10 +6,9 @@ import { createImageURL } from '../lib/api/utils'
 import styled from 'styled-components'
 
 export default function Itemcard({ item }: { item: Item }) {
-  console.log(item)
   return (
     <StyledContainer>
-      <Link href={`/i/${item._id}`}>
+      <Link href={`/i/${item._id}`} passHref>
         <StyledCard>
           <StyledContent>
             <StyledImagecontent>
@@ -17,6 +16,7 @@ export default function Itemcard({ item }: { item: Item }) {
                 layout='fill'
                 objectFit='cover'
                 src={createImageURL(item.imageUrls ? item.imageUrls[0] : '')}
+                alt=''
               ></Image>
             </StyledImagecontent>
             <StyledItemcontent>

@@ -13,12 +13,8 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
 
   useEffect(() => {
     return () => {
-      /* console.log('cleanup useEffect')
-      console.log(previewFiles) */
-
       previewFiles &&
         previewFiles.forEach(objectUrl => {
-          console.log('removed objectUrl: ', objectUrl)
           URL.revokeObjectURL(objectUrl)
         })
     }
@@ -32,12 +28,10 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
 
     let objectUrls = Array.from(e.currentTarget.files).map(file => {
       const oUrl = URL.createObjectURL(file)
-      /* console.log('created objectUrl: ', oUrl) */
       return oUrl
     })
 
     setPreviewFiles(objectUrls)
-    /* console.log('set Files to', e.currentTarget.files) */
   }
 
   return (

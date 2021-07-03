@@ -37,7 +37,7 @@ export default function ImageBox({ images }: { images: Array<string> }) {
           {images.map((imageUrl, index) => (
             <SwiperSlide key={`thumb-${imageUrl}`}>
               <ThumbImageContainer active={index === currentSlide}>
-                <Image src={createImageURL(imageUrl)} height='75px' width='75px' objectFit='cover'></Image>
+                <Image src={createImageURL(imageUrl)} height='75px' width='75px' objectFit='cover' alt=''></Image>
               </ThumbImageContainer>
             </SwiperSlide>
           ))}

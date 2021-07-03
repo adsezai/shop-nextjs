@@ -9,7 +9,7 @@ type Tokens = {
   accessToken: string
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function registerApi(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { name, email, password } = req.body
     try {

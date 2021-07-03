@@ -4,7 +4,7 @@ import * as cookie from 'cookie'
 import { tokenNames as n } from '../../lib/global/const'
 import { errorUnauthorized } from '../../lib/global/errors'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function userApi(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
       const cookies = cookie.parse(req.headers.cookie)

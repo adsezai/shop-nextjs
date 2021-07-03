@@ -3,7 +3,7 @@ import { addItem } from '../../lib/api/server/items'
 import { tokenNames as n } from '../../lib/global/const'
 import * as cookie from 'cookie'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function addItemApi(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const data = req.body
     const cookies = cookie.parse(req.headers.cookie)

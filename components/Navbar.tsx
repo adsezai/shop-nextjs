@@ -14,25 +14,25 @@ export default function Navbar() {
     <StyledNav>
       <StyledContainer>
         <LeftNav>
-          <Link href={'/'}>
+          <Link href={'/'} passHref>
             <StyledA>SHOP</StyledA>
           </Link>
         </LeftNav>
         <RightNav>
-          <Link href={!isError ? '/sell' : '/login'}>
+          <Link href={!isError ? '/sell' : '/login'} passHref>
             <Button as='a' size='medium'>
               {t('sell')}
             </Button>
           </Link>
           {isError && !isLoading && (
-            <Link href='/login'>
+            <Link href='/login' passHref>
               <Button as='a' size='medium'>
                 {t('login')}
               </Button>
             </Link>
           )}
           {!isError && user && !isLoading && (
-            <Link href='/'>
+            <Link href='/' passHref>
               <Button as='a' size='medium'>
                 {user.data.firstname}
               </Button>

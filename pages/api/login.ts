@@ -9,7 +9,7 @@ interface Tokens {
   accessToken: string
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function loginApi(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { email, password } = req.body
     try {

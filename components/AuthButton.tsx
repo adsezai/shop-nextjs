@@ -22,7 +22,7 @@ export const AuthButton = ({ value, disabled }: AuthButtonProps) => {
 
 export const GoogleAuthButton = ({ href, value }: AuthButtonProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <StyledAnchor>
         <StyledGoogleAuthButton>
           <StyledIcon size='20'>
@@ -38,7 +38,7 @@ export const GoogleAuthButton = ({ href, value }: AuthButtonProps) => {
 
 export const FacebookAuthButton = ({ href, value }: AuthButtonProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <StyledAnchor>
         <StyledFacebookAuthButton>
           <StyledIcon size='24'>
