@@ -1,3 +1,9 @@
 const nextTranslate = require('next-translate')
 
-module.exports = nextTranslate()
+const config = {
+  images: {
+    domains: ['picsum.photos', 'adsezaistorage.blob.core.windows.net']
+  }
+}
+
+module.exports = nextTranslate(config)
