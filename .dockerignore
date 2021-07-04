@@ -1,0 +1,7 @@
+node_modules
+mocks
+coverage
+.github
+.vscode
+test
+.nextjs
