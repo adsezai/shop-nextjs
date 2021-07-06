@@ -51,7 +51,7 @@ export async function register(name: string, email: string, password: string) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ name, email, password })
-  })
+  }).then(handleFetchErrors)
 }
 
 /**

@@ -9,5 +9,6 @@
   "notRegistered": "Noch keinen Account?",
   "alreadyRegistered": "Bereits Registriert?",
   "unauthorized": "Die E-Mail Adresse oder das Passwort ist falsch.",
-  "internal": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie erneut sich anzumelden."
+  "internal": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie erneut sich anzumelden.",
+  "conflict": "Ein Account mit dieser E-Mail Adresse ist bereits vorhanden."
 }
