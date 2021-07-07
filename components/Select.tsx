@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { SpaceSize, Space } from '../styles/utils'
 
@@ -7,26 +8,34 @@ type SelectProps = {
   onChange(e: React.ChangeEvent<HTMLSelectElement>): void
   value?: string
   name?: string
+  error?: any
 }
 
-const Select = ({ name, label, children, onChange, value }: SelectProps) => {
+const Select = forwardRef(({ name, label, children, onChange, value, error }: SelectProps, ref: any) => {
   return (
     <StyledLabel>
-      {label}
+      {label}&nbsp;
       {label && <Space y={SpaceSize.micro} />}
-      <StyledSelect name={name} value={value} onChange={onChange}>
+      <StyledSelect ref={ref} name={name} value={value} onChange={onChange} error={error}>
         {children}
       </StyledSelect>
+      {error && <StyledHint>{error}</StyledHint>}
     </StyledLabel>
   )
-}
+})
+
+Select.displayName = 'Select'
 
 const StyledLabel = styled.label`
   color: ${props => props.theme.colors.text.default};
   font-size: ${props => props.theme.fontSizes.m};
 `
-
-const StyledSelect = styled.select`
+const StyledHint = styled.div`
+  color: ${props => props.theme.colors.text.error};
+  font-size: ${props => props.theme.fontSizes.xs};
+  margin-top: 3px;
+`
+const StyledSelect = styled.select<SelectProps>`
   width: 100%;
   min-width: 0px;
   outline: transparent solid 2px;
@@ -43,7 +52,7 @@ const StyledSelect = styled.select`
   border-width: 1px;
   border-style: solid;
   border-image: initial;
-  border-color: ${props => props.theme.colors.borders.lightgray};
+  border-color: ${props => (props.error ? props.theme.colors.text.error : props.theme.colors.borders.lightgray)};
   background: inherit;
 `
 export default Select

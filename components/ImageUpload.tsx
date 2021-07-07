@@ -6,9 +6,14 @@ import React, { useEffect, useState } from 'react'
 
 type ImageUploadProp = {
   title: string
+  name: string
+  register?: any
+  error?: any
+  setError?: any
+  clearErrors?: any
 }
 
-const ImageUpload = ({ title }: ImageUploadProp) => {
+const ImageUpload = ({ title, name, register, error, setError, clearErrors }: ImageUploadProp) => {
   const [previewFiles, setPreviewFiles] = useState<Array<string>>()
 
   useEffect(() => {
@@ -25,6 +30,7 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
       setPreviewFiles(null)
       return
     }
+    clearErrors(name)
 
     let objectUrls = Array.from(e.currentTarget.files).map(file => {
       const oUrl = URL.createObjectURL(file)
@@ -39,14 +45,13 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
       <Text mt='0'>{title}</Text>
       <Space y={SpaceSize.xs} />
       <RelativeWrapper>
-        <Dropzone>
+        <Dropzone error={error}>
           <ImageIcon />
           <StyledFileUpload
+            {...register(name, { required: true })}
             type='file'
-            name='image'
             multiple
             accept='image/png, image/jpeg'
-            required
             onChange={handleChange}
           />
         </Dropzone>
@@ -62,10 +67,15 @@ const ImageUpload = ({ title }: ImageUploadProp) => {
             )
           })}
       </Box>
+      {error && <StyledHint>{error}</StyledHint>}
     </Box>
   )
 }
-
+const StyledHint = styled.div`
+  color: ${props => props.theme.colors.text.error};
+  font-size: ${props => props.theme.fontSizes.xs};
+  margin-top: 3px;
+`
 const Thumbnail = styled.div`
   margin: 8px 15px 8px 0;
 
@@ -91,11 +101,11 @@ const ImageIcon = styled(AddImageIcon)`
 const RelativeWrapper = styled.div`
   position: relative;
 `
-const Dropzone = styled(Box)`
+const Dropzone = styled(Box)<{ error: any }>`
   height: 100px;
   border-width: 2px;
   border-style: dashed;
-  border-color: ${props => props.theme.colors.borders.lightgray};
+  border-color: ${props => (props.error ? props.theme.colors.text.error : props.theme.colors.borders.lightgray)};
   border-radius: ${props => props.theme.borderRadiuses.default};
 
   justify-content: center;
