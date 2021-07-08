@@ -20,12 +20,14 @@ type ColorText = {
   link: string
   warning: string
   error: string
+  success: string
 }
 
 type ColorBackground = {
   fadedGreyScale: string
   default: string
   nav: string
+  error: string
 }
 
 type ColorBorders = {

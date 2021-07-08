@@ -26,5 +26,14 @@ export const handlers = [
   // user
   rest.get(process.env.BACKEND_URL + '/users/user/*', (req, res, ctx) => {
     return res(ctx.json(user()))
+  }),
+
+  // image upload
+  rest.post(createURL('/api/additem'), (req, res, ctx) => {
+    return res(ctx.json({ message: 'ok' }))
+  }),
+
+  rest.post(createURL('/api/addimages'), (req, res, ctx) => {
+    return res(ctx.delay(3000), ctx.json({ message: 'ok' }))
   })
 ]

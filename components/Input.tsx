@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { SpaceSize, Space } from '../styles/utils'
 import { size, SizeProps } from 'styled-system'
@@ -5,37 +6,55 @@ import { size, SizeProps } from 'styled-system'
 type InputProps = {
   type?: string
   placeholder?: string
-  value?: string
+  value?: string | number
   label?: string
-  onChange(e: React.ChangeEvent<HTMLInputElement>): void
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void
   as?: any
   width?: string
   required?: boolean
   name?: string
+  error?: any
+  step?: any
 }
 
-const Input = ({ name, label, type = 'text', placeholder, value, onChange, as, width, required }: InputProps) => {
-  return (
-    <StyledLabel>
-      {label}
-      {label && <Space y={SpaceSize.micro} />}
-      <StyledInput
-        name={name}
-        width={width}
-        as={as}
-        type={type}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        required={required}
-      ></StyledInput>
-    </StyledLabel>
-  )
-}
+const Input = forwardRef(
+  (
+    { name, label, type = 'text', placeholder, value, onChange, as, width, required, step, error }: InputProps,
+    ref: any
+  ) => {
+    return (
+      <StyledLabel>
+        {label}
+        {label && <Space y={SpaceSize.micro} />}
+        <StyledInput
+          error={error}
+          ref={ref}
+          name={name}
+          width={width}
+          as={as}
+          type={type}
+          value={value}
+          step={step}
+          placeholder={placeholder}
+          onChange={onChange}
+          required={required}
+        ></StyledInput>
+        {error && <StyledHint>{error}</StyledHint>}
+      </StyledLabel>
+    )
+  }
+)
+
+Input.displayName = 'Input'
 
 const StyledLabel = styled.label`
   color: ${props => props.theme.colors.text.default};
   font-size: ${props => props.theme.fontSizes.m};
+`
+const StyledHint = styled.div`
+  color: ${props => props.theme.colors.text.error};
+  font-size: ${props => props.theme.fontSizes.xs};
+  margin-top: 3px;
 `
 
 const StyledInput = styled.input<InputProps>`
@@ -56,7 +75,7 @@ const StyledInput = styled.input<InputProps>`
   border-width: 1px;
   border-style: solid;
   border-image: initial;
-  border-color: ${props => props.theme.colors.borders.lightgray};
+  border-color: ${props => (props.error ? props.theme.colors.text.error : props.theme.colors.borders.lightgray)};
   background: inherit;
 `
 export default Input

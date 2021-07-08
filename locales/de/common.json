@@ -3,6 +3,9 @@
   "login": "Anmelden",
   "categories": [
     {
+      "general": "Sonstiges"
+    },
+    {
       "car": "Auto"
     },
     {

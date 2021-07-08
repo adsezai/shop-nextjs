@@ -6,5 +6,12 @@
   "descriptionInput": "Beschreibung",
   "categoryInput": "Kategorie",
   "locationInput": "Ort des Produktes",
-  "imageUpload": "Fotos hinzufügen"
+  "imageUpload": "Fotos hinzufügen",
+  "errorEmpty": "Bitte geben Sie einen Wert ein.",
+  "errorImage": "Bitte wählen Sie mindestens ein und maximal fünf Bild aus.",
+  "addItemLoading": "Das Produkt wird erstellt.",
+  "addItemLoadingWait": "Bitte warten.",
+  "addItemSuccess": "Erfolgreich erstellt.",
+  "addItemRedirect": "Sie werden weitergeleitet.",
+  "addItemError": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
 }
