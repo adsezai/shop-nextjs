@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import styled from 'styled-components'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
@@ -11,6 +11,23 @@ import ImageUpload from '../components/ImageUpload'
 import Button from '../components/Button'
 import Select from '../components/Select'
 import { omit } from 'lodash'
+import { useState } from 'react'
+
+import Modal from 'react-modal'
+import { theme } from '../styles/theme'
+
+Modal.setAppElement('#__next')
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+}
 
 type Inputs = {
   image: FileList
@@ -22,11 +39,18 @@ type Inputs = {
   location: string
 }
 
+enum UploadState {
+  INIT = 'init',
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error'
+}
+
 type ItemData = Omit<Inputs, 'price' | 'image'> & { price?: number }
 
 export default function Sell({}) {
   const { t } = useTranslation('sell')
-
+  const router = useRouter()
   const {
     handleSubmit,
     control,
@@ -36,6 +60,9 @@ export default function Sell({}) {
     clearErrors
   } = useForm<Inputs>()
 
+  const [uploadState, setUploadState] = useState<UploadState>(UploadState.INIT)
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+
   const onSubmit: SubmitHandler<Inputs> = async data => {
     const imageForm = new FormData()
 
@@ -44,8 +71,21 @@ export default function Sell({}) {
     const itemData: ItemData = omit(data, ['price', 'image'])
     itemData.price = parseFloat(data.price)
 
-    const item = await addItemData(itemData)
-    const images = await addItemImages(item._id, imageForm)
+    try {
+      setUploadState(UploadState.LOADING)
+      setIsOpen(true)
+      const item = await addItemData(itemData)
+      await addItemImages(item._id, imageForm)
+      setUploadState(UploadState.SUCCESS)
+
+      setTimeout(() => {
+        router.push('/')
+        //setIsOpen(false)
+      }, 2000)
+    } catch (error) {
+      setUploadState(UploadState.ERROR)
+      setIsOpen(false)
+    }
   }
 
   return (
@@ -134,6 +174,7 @@ export default function Sell({}) {
               <Controller
                 name='category'
                 control={control}
+                defaultValue={'general'}
                 rules={{ required: true }}
                 render={({ field }) => (
                   <Select {...field} label={t('categoryInput')} error={errors.category && t('errorEmpty')}>
@@ -164,10 +205,35 @@ export default function Sell({}) {
                 )}
               />
             </Card>
+            {uploadState === UploadState.ERROR && (
+              <Text padding='8px 5px' backgroundColor={theme.colors.background.error} color={theme.colors.text.error}>
+                {t('addItemError')}
+              </Text>
+            )}
             <Box justifyContent='flex-end' mt='20px'>
               <Button type='submit' size='medium'>
                 {t('publish')}
               </Button>
+              <Modal isOpen={modalIsOpen} style={customStyles} contentLabel='Example Modal'>
+                <ModalBody>
+                  {uploadState === UploadState.LOADING && (
+                    <>
+                      <Text fontSize='20px'>{t('addItemLoading')}</Text>
+                      <Dots></Dots>
+                    </>
+                  )}
+                  {uploadState === UploadState.SUCCESS && (
+                    <>
+                      <Text fontSize='20px' color={theme.colors.text.success}>
+                        {t('addItemSuccess')}
+                      </Text>
+                      <Text fontSize='14px' color={theme.colors.text.success}>
+                        {t('addItemRedirect')}
+                      </Text>
+                    </>
+                  )}
+                </ModalBody>
+              </Modal>
             </Box>
           </Box>
         </form>
@@ -175,6 +241,36 @@ export default function Sell({}) {
     </>
   )
 }
+
+const Dots = styled.span`
+  &::after {
+    display: inline-block;
+    animation: ellipsis 1.25s infinite;
+    content: '.';
+    width: 1em;
+    text-align: left;
+    font-size: 45px;
+  }
+  @keyframes ellipsis {
+    0% {
+      content: '.';
+    }
+    33% {
+      content: '..';
+    }
+    66% {
+      content: '...';
+    }
+  }
+`
+
+const ModalBody = styled(Box)`
+  width: 500px;
+  height: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const Card = styled(Box)`
   padding: 30px;

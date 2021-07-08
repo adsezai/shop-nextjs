@@ -30,12 +30,14 @@ export const theme: Theme = {
       default: '#24292e',
       link: '#fff',
       warning: '#fff',
-      error: '#dc3545'
+      error: '#dc3545',
+      success: '#28a745'
     },
     background: {
       fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
       default: '#fff', //rgb(247, 248, 247)
-      nav: '#7befb2'
+      nav: '#7befb2',
+      error: '#f8d7da'
     },
     borders: {
       hairline: 'rgb(235, 238, 240)',
