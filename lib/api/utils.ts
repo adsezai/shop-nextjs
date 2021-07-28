@@ -12,7 +12,7 @@ export function createURL(path: string) {
 export function createImageURL(id: string) {
   return process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
     ? `https://picsum.photos/500/500`
-    : `https://adsezaistorage.blob.core.windows.net/adsezai/${id}`
+    : `https://shop-adsezai.azureedge.net/adsezai/${id}`
 }
 
 export function createCookie(name: string, value: string, path?: string): string {

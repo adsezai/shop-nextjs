@@ -39,7 +39,11 @@ export default function Login() {
       router.push('/')
     } catch (error) {
       setLoading(false)
-      const errorMessage = error.code === 401 ? t('unauthorized') : error.code === 409 ? t('conflict') : t('internal')
+      const errorMessage = [401, 404].includes(error.code)
+        ? t('unauthorized')
+        : error.code === 409
+        ? t('conflict')
+        : t('internal')
       setError(errorMessage)
     }
   }

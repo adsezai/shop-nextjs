@@ -26,6 +26,7 @@ export async function addItemData(data: any) {
 export async function addItemImages(itemid: string, formData: FormData) {
   return fetch(createURL('/api/addimages') + `?${new URLSearchParams({ itemid })}`, {
     method: 'POST',
+    credentials: 'include',
     body: formData
   }).then(handleFetchErrors)
 }

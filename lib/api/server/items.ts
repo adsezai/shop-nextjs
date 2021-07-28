@@ -52,7 +52,14 @@ export async function addItemImage(formData: any, accessToken: string) {
 }
 
 export async function addItemImageStream(req: any, itemid: string | string[], accessToken: string) {
-  const res = await axios({
+  const res = await axios.post(`/items/image/`, req, {
+    params: {
+      itemid
+    },
+    headers: { ...req.headers, Authorization: `Bearer ${accessToken}`, 'fwd-auth': `Bearer ${accessToken}` }
+  })
+
+  /*   const res = await axios({
     url: `/items/image/`,
     method: 'POST',
     headers: { ...req.headers, Authorization: `Bearer ${accessToken}` },
@@ -60,6 +67,6 @@ export async function addItemImageStream(req: any, itemid: string | string[], ac
       itemid
     },
     data: req
-  })
+  }) */
   return res.data
 }
