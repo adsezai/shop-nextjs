@@ -16,7 +16,7 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 import { theme } from '../styles/theme'
 
-Modal.setAppElement('#__next')
+Modal.setAppElement('body')
 
 const customStyles = {
   content: {
@@ -48,7 +48,7 @@ enum UploadState {
 
 type ItemData = Omit<Inputs, 'price' | 'image'> & { price?: number }
 
-export default function Sell({}) {
+export default function Sell({ inputsRequired = true }: { inputsRequired?: boolean }) {
   const { t } = useTranslation('sell')
   const router = useRouter()
   const {
@@ -66,7 +66,7 @@ export default function Sell({}) {
   const onSubmit: SubmitHandler<Inputs> = async data => {
     const imageForm = new FormData()
 
-    Array.from(data.image).forEach(image => imageForm.append('image', image))
+    data.image && Array.from(data.image).forEach(image => imageForm.append('image', image))
 
     const itemData: ItemData = omit(data, ['price', 'image'])
     itemData.price = parseFloat(data.price)
@@ -104,6 +104,7 @@ export default function Sell({}) {
                 clearErrors={clearErrors}
                 setError={setError}
                 title={t('imageUpload')}
+                required={inputsRequired}
               />
             </Card>
             <Card mt='20px' flexDirection='column'>
@@ -111,7 +112,7 @@ export default function Sell({}) {
                 name='title'
                 control={control}
                 defaultValue=''
-                rules={{ required: true }}
+                rules={{ required: inputsRequired }}
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -141,7 +142,8 @@ export default function Sell({}) {
                 <Controller
                   name='price'
                   control={control}
-                  rules={{ required: true, pattern: /^(\d+(?:[\.\,]\d{1,2})?)$/ }}
+                  defaultValue=''
+                  rules={{ required: inputsRequired, pattern: /^(\d+(?:[\.\,]\d{1,2})?)$/ }}
                   render={({ field }) => (
                     <Input
                       {...field}
@@ -160,7 +162,7 @@ export default function Sell({}) {
                   name='currency'
                   control={control}
                   defaultValue='eur'
-                  rules={{ required: true }}
+                  rules={{ required: inputsRequired }}
                   render={({ field }) => (
                     <Select {...field} label=' ' error={errors.currency && t('errorEmpty')}>
                       <option value='eur'>EUR</option>
@@ -175,7 +177,7 @@ export default function Sell({}) {
                 name='category'
                 control={control}
                 defaultValue={'general'}
-                rules={{ required: true }}
+                rules={{ required: inputsRequired }}
                 render={({ field }) => (
                   <Select {...field} label={t('categoryInput')} error={errors.category && t('errorEmpty')}>
                     {(t('common:categories', null, { returnObjects: true }) as Array<any>).map(obj => {
@@ -194,7 +196,7 @@ export default function Sell({}) {
                 name='location'
                 control={control}
                 defaultValue=''
-                rules={{ required: true }}
+                rules={{ required: inputsRequired }}
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -215,7 +217,7 @@ export default function Sell({}) {
                 {t('publish')}
               </Button>
               <Modal isOpen={modalIsOpen} style={customStyles} contentLabel='Example Modal'>
-                <ModalBody>
+                <ModalBody data-testid='sell-modal'>
                   {uploadState === UploadState.LOADING && (
                     <>
                       <Text fontSize='20px'>{t('addItemLoading')}</Text>

@@ -11,9 +11,10 @@ type ImageUploadProp = {
   error?: any
   setError?: any
   clearErrors?: any
+  required?: boolean
 }
 
-const ImageUpload = ({ title, name, register, error, setError, clearErrors }: ImageUploadProp) => {
+const ImageUpload = ({ title, name, register, error, setError, clearErrors, required = true }: ImageUploadProp) => {
   const [previewFiles, setPreviewFiles] = useState<Array<string>>()
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ImageUpload = ({ title, name, register, error, setError, clearErrors }: Im
         <Dropzone error={error}>
           <ImageIcon />
           <StyledFileUpload
-            {...register(name, { required: true })}
+            {...register(name, { required: required })}
             type='file'
             multiple
             accept='image/png, image/jpeg'
