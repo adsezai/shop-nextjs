@@ -101,7 +101,10 @@ export default function Login() {
             <ResponsiveBox resWidth='6%'></ResponsiveBox>
             <ResponsiveBox resWidth='47%'>
               <StyledSocialSignin>
-                <GoogleAuthButton href='/api/auth' value={t('socialAuth', { social: 'Google' })}></GoogleAuthButton>
+                <GoogleAuthButton
+                  href='/api/auth/google'
+                  value={t('socialAuth', { social: 'Google' })}
+                ></GoogleAuthButton>
                 <Space y={SpaceSize.xs}></Space>
                 <FacebookAuthButton href='' value={t('socialAuth', { social: 'Facebook' })}></FacebookAuthButton>
               </StyledSocialSignin>
