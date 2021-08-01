@@ -64,18 +64,19 @@ export default function ItemPage({ item, user }: Props) {
               <HrDivider />
               <CenterHorizontally>
                 <CenterHorizontally>
-                  <StyledImage src='https://picsum.photos/40/40' alt='img' />
+                  <StyledImage src={user?.picture?.url || '/icons/person.svg'} alt='img' />
                 </CenterHorizontally>
                 <Box flexDirection='column'>
-                  <Text m='0' fontWeight='bold'>
+                  <Text m='0' fontWeight='bold' lineHeight='1'>
                     {user.firstname}
                   </Text>
-                  <Text m='0'>{user.email}</Text>
+                  <Text mt='2px' lineHeight='1'>
+                    {user.email}
+                  </Text>
                 </Box>
               </CenterHorizontally>
               <HrDivider />
             </StyledContact>
-
             <Text>
               {t('onlineSince')} {new Date(item.createDate).toLocaleDateString()}
             </Text>
@@ -142,4 +143,5 @@ const StyledImage = styled.img`
   width: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  background-color: lightgrey;
 `
