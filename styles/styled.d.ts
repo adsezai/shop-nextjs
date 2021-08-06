@@ -28,6 +28,7 @@ type ColorBackground = {
   default: string
   nav: string
   error: string
+  disabled: string
 }
 
 type ColorBorders = {

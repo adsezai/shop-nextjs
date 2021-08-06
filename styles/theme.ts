@@ -37,7 +37,8 @@ export const theme: Theme = {
       fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
       default: '#fff', //rgb(247, 248, 247)
       nav: '#7befb2',
-      error: '#f8d7da'
+      error: '#f8d7da',
+      disabled: '#e9ecef'
     },
     borders: {
       hairline: 'rgb(235, 238, 240)',

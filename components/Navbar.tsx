@@ -32,7 +32,7 @@ export default function Navbar() {
             </Link>
           )}
           {!isError && user && !isLoading && (
-            <Link href='/' passHref>
+            <Link href='/profile' passHref>
               <Button as='a' size='medium'>
                 {user.data.firstname}
               </Button>

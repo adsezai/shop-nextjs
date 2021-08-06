@@ -15,11 +15,25 @@ type InputProps = {
   name?: string
   error?: any
   step?: any
+  readOnly?: boolean
 }
 
 const Input = forwardRef(
   (
-    { name, label, type = 'text', placeholder, value, onChange, as, width, required, step, error }: InputProps,
+    {
+      name,
+      label,
+      type = 'text',
+      placeholder,
+      value,
+      onChange,
+      as,
+      width,
+      required,
+      step,
+      error,
+      readOnly
+    }: InputProps,
     ref: any
   ) => {
     return (
@@ -38,6 +52,7 @@ const Input = forwardRef(
           placeholder={placeholder}
           onChange={onChange}
           required={required}
+          readOnly={readOnly}
         ></StyledInput>
         {error && <StyledHint>{error}</StyledHint>}
       </StyledLabel>
@@ -77,5 +92,9 @@ const StyledInput = styled.input<InputProps>`
   border-image: initial;
   border-color: ${props => (props.error ? props.theme.colors.text.error : props.theme.colors.borders.lightgray)};
   background: inherit;
+
+  &:read-only {
+    background-color: ${props => props.theme.colors.background.disabled};
+  }
 `
 export default Input
